@@ -1,0 +1,88 @@
+{% extends "admin/base_site.html" %}
+{% load static admin_urls %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  {{ media.css }}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script>
+$(function () {
+  function preview_iframe_url(task_id) {
+    var original_url = '{% url 'preview_iframe' first_task_id %}';
+    var original_task_id = '{{ first_task_id }}';
+    return original_url.replace(original_task_id, task_id);
+  }
+
+  function update_task_counter(task_index, total_tasks) {
+    $('#task_counter').text('Task ' + (task_index + 1) + '/' + total_tasks);
+  }
+
+  var task_ids = {{ task_ids_as_json }};
+  var task_index = 0;
+
+  update_task_counter(0, task_ids.length);
+
+  $('#next_task').click(function() {
+    task_index = (task_index + 1) % task_ids.length;
+    $('#preview_iframe').attr('src', preview_iframe_url(task_ids[task_index]));
+    update_task_counter(task_index, task_ids.length);
+  });
+  $('#previous_task').click(function() {
+    task_index -= 1;
+    if (task_index < 0) {
+      task_index += task_ids.length;
+    }
+    $('#preview_iframe').attr('src', preview_iframe_url(task_ids[task_index]));
+    update_task_counter(task_index, task_ids.length);
+  });
+});
+</script>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">Home</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; {% if has_view_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+&rsaquo; Review Batch
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="clearfix container">
+  <div class="float-right">
+    <span class="inline-form-buttons">
+      <span id="task_counter" class="mr-2"></span>
+
+      <a href="#" id="previous_task" role="button" class="btn btn-sm btn-info">Previous Task</a>
+
+      <a href="#" id="next_task" role="button" class="btn btn-sm btn-info">Next Task</a>
+
+      <form method="post" action="{% url 'admin:turkle_publish_batch' batch_id  %}">
+        {% csrf_token %}
+        <input type="submit" id="publishButton" value="Publish Batch" />
+      </form>
+
+      <form method="post" action="{% url 'admin:turkle_cancel_batch' batch_id %}">
+        {% csrf_token %}
+        <input type="submit" id="cancelButton" value="Cancel Batch" />
+      </form>
+    </span>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <div style="height: 500px;">
+    <iframe src="{% url 'preview_iframe' first_task_id %}" id="preview_iframe">
+    </iframe>
+  </div>
+
+</div>
+{% endblock %}

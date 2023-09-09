@@ -1,0 +1,645 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-01 11:17+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: turkle/admin.py:142
+#, python-format
+msgid "%d user was activated."
+msgid_plural "%d users were activated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: turkle/admin.py:154
+#, python-format
+msgid "%d user was deactivated."
+msgid_plural "%d users were deactivated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: turkle/admin.py:1467
+#, python-format
+msgid "%d  was successfully marked as paymented."
+msgid_plural "%d stories were successfully marked as published."
+msgstr[0] ""
+msgstr[1] ""
+
+#: turkle/templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: turkle/templates/admin/base_site.html:7
+msgid "Django administration"
+msgstr ""
+
+#: turkle/templates/registration/login.html:5
+#: turkle/templates/turkle/SignUp.html:6 turkle/templates/turkle/base.html:6
+#, python-format
+msgid "%(turkle_site_name)s"
+msgstr ""
+
+#: turkle/templates/registration/login.html:50
+#: turkle/templates/turkle/SignUp.html:51 turkle/templates/turkle/index.html:99
+msgid "Return"
+msgstr ""
+
+#: turkle/templates/registration/login.html:74
+msgid "Please login to see this page."
+msgstr ""
+
+#: turkle/templates/registration/login.html:83
+#: turkle/templates/registration/login.html:94
+#: turkle/templates/turkle/base.html:190
+msgid "Login"
+msgstr ""
+
+#: turkle/templates/registration/login.html:86
+#: turkle/templates/turkle/SignUp.html:60
+msgid "username"
+msgstr ""
+
+#: turkle/templates/registration/login.html:89
+#: turkle/templates/turkle/SignUp.html:69
+msgid "password"
+msgstr ""
+
+#: turkle/templates/registration/login.html:97
+#: turkle/templates/turkle/SignUp.html:58
+#: turkle/templates/turkle/SignUp.html:81
+msgid "Sign Up"
+msgstr ""
+
+#: turkle/templates/registration/login.html:102
+msgid "Reset your Password"
+msgstr ""
+
+#: turkle/templates/registration/password_change_done.html:14
+msgid "Your password was changed."
+msgstr ""
+
+#: turkle/templates/registration/password_change_form.html:24
+msgid ""
+"Enter your current password and your new password twice for verification."
+msgstr ""
+
+#: turkle/templates/registration/password_change_form.html:31
+msgid "change password"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_complete.html:13
+msgid "Your password has been reset.  You can log in now."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_complete.html:14
+msgid "Log in"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_confirm.html:16
+msgid "Please enter your new password twice."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_confirm.html:25
+msgid "New password:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_confirm.html:36
+msgid "Confirm password:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_confirm.html:43
+msgid "Change my password"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_confirm.html:48
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_done.html:13
+msgid ""
+"We've emailed instructions for resetting your password if an account exists "
+"with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_done.html:15
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with and check your spam folder."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:10
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_form.html:14
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_form.html:21
+msgid "Email address:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_form.html:28
+msgid "Reset my password"
+msgstr ""
+
+#: turkle/templates/registration/register_phone_number.html:10
+msgid "Please enter your phone number"
+msgstr ""
+
+#: turkle/templates/registration/register_phone_number.html:12
+#: turkle/templates/turkle/edit_profile.html:72
+#: turkle/templates/turkle/edit_profile.html:75
+#: turkle/templates/turkle/profile_edit_phone.html:18
+msgid "Phone number"
+msgstr ""
+
+#: turkle/templates/registration/register_phone_number.html:21
+msgid "Receive verification code"
+msgstr ""
+
+#: turkle/templates/registration/verify_phone_number.html:10
+msgid "Please enter your code"
+msgstr ""
+
+#: turkle/templates/registration/verify_phone_number.html:12
+msgid "Verification Code"
+msgstr ""
+
+#: turkle/templates/registration/verify_phone_number.html:21
+msgid "Verify your phone number"
+msgstr ""
+
+#: turkle/templates/turkle/SignUp.html:63
+#: turkle/templates/turkle/edit_profile.html:52
+msgid "First name"
+msgstr ""
+
+#: turkle/templates/turkle/SignUp.html:66
+#: turkle/templates/turkle/edit_profile.html:55
+msgid "Last name"
+msgstr ""
+
+#: turkle/templates/turkle/SignUp.html:73
+msgid "password confirmation"
+msgstr ""
+
+#: turkle/templates/turkle/SignUp.html:77
+#: turkle/templates/turkle/profile.html:75
+msgid "email"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:158
+msgid "Your Progress"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:158
+msgid "Stats"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:163
+msgid "Administration"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:163
+msgid "Admin"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:168
+msgid "Main Page"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:168
+msgid "Home"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:173
+#, python-format
+msgid "%(username)s"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:178
+msgid "Profile"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:179 turkle/templates/turkle/base.html:187
+#: turkle/templates/turkle/help.html:9
+msgid "Help"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:181
+msgid "Logout"
+msgstr ""
+
+#: turkle/templates/turkle/base.html:190
+msgid "Sign up"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:46
+msgid "Personal information"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:48
+msgid "Username"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:59
+msgid "Email address"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:62
+#: turkle/templates/turkle/edit_profile.html:78
+#: turkle/templates/turkle/edit_profile.html:100
+#: turkle/templates/turkle/edit_profile.html:121
+#: turkle/templates/turkle/profile_edit_bank.html:22
+#: turkle/templates/turkle/profile_edit_general.html:20
+#: turkle/templates/turkle/profile_edit_phone.html:22
+#: turkle/templates/turkle/profile_edit_proficiency.html:22
+msgid "Save changes"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:88
+#: turkle/templates/turkle/profile_edit_bank.html:18
+msgid "Card Info"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:91
+msgid "Bank card"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:94
+msgid "Shaba number"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:97
+msgid "Account number"
+msgstr ""
+
+#: turkle/templates/turkle/edit_profile.html:112
+#: turkle/templates/turkle/profile.html:117
+#: turkle/templates/turkle/profile_edit_proficiency.html:18
+msgid "Proficiency"
+msgstr ""
+
+#: turkle/templates/turkle/help.html:14 turkle/templates/turkle/index.html:141
+msgid "Accept next Task"
+msgstr ""
+
+#: turkle/templates/turkle/help.html:17
+msgid "The task is assigned to you."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:18
+msgid ""
+"If you do not finish it, you will be reminded on the main page that you have "
+"abandoned the task."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:19
+msgid ""
+"If you do not complete it by the deadline, it is returned to the task list."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:24
+msgid "Auto-accept next Task"
+msgstr ""
+
+#: turkle/templates/turkle/help.html:27
+msgid ""
+"Rather than being returned to the main page each time, the next task is "
+"automatically assigned to you."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:34
+#: turkle/templates/turkle/task_assignment.html:78
+msgid "Return Task"
+msgstr ""
+
+#: turkle/templates/turkle/help.html:37
+msgid ""
+"Returns the currently assigned task so that it is no longer assigned to you."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:38
+msgid ""
+"If you accept a task from the same batch, that returned task could be "
+"assigned to you again."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:39
+msgid "If you do not want to work on that particular task, you should skip it."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:44 turkle/templates/turkle/preview.html:32
+#: turkle/templates/turkle/task_assignment.html:68
+msgid "Skip Task"
+msgstr ""
+
+#: turkle/templates/turkle/help.html:47
+msgid "Skip to the next available task in the Batch."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:48
+msgid "The task is removed from your assignments."
+msgstr ""
+
+#: turkle/templates/turkle/help.html:49
+msgid ""
+"You may see it again if all other tasks have been completed and no one else "
+"completed it."
+msgstr ""
+
+#: turkle/templates/turkle/index.html:85
+#: turkle/templates/turkle/task_assignment_iframe.html:9
+msgid "Task"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:87 turkle/templates/turkle/index.html:126
+#: turkle/templates/turkle/payment.html:25
+msgid "Project"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:89 turkle/templates/turkle/index.html:132
+#: turkle/templates/turkle/payment.html:26
+msgid "Batch"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:95
+msgid "Continue"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:133
+#: turkle/templates/turkle/payment.html:38
+#: turkle/templates/turkle/stats.html:184
+#, python-format
+msgid "%(batch_name)s"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:134
+msgid "Batch Published"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:136
+msgid "Tasks Available"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:137
+#, python-format
+msgid "%(assignments_available)s"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:138
+msgid "Preview next Task"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:165
+msgid "No Tasks available at this time"
+msgstr ""
+
+#: turkle/templates/turkle/index.html:169
+#, python-format
+msgid ""
+"You may need to <a href=\"%(the_url)s\">Login</a> to see available Tasks"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:18
+#, python-format
+msgid "%(fullname)s"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:27
+msgid "Task Count"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:28
+msgid "Price"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:29
+msgid "Payment Status"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:30
+msgid "Paid At"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:35
+#: turkle/templates/turkle/stats.html:157
+#, python-format
+msgid "%(project_name)s"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:41
+#, python-format
+msgid "%(task_count)s"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:44
+#, python-format
+msgid "%(price)s"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:48
+msgid "Paid"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:50
+#: turkle/templates/turkle/payment.html:57
+msgid "-"
+msgstr ""
+
+#: turkle/templates/turkle/payment.html:55
+#, python-format
+msgid "%(date)s"
+msgstr ""
+
+#: turkle/templates/turkle/preview.html:22
+msgid "Accept Task"
+msgstr ""
+
+#: turkle/templates/turkle/preview.html:40
+msgid "Stop Preview"
+msgstr ""
+
+#: turkle/templates/turkle/preview.html:45
+msgid "This is only a preview."
+msgstr ""
+
+#: turkle/templates/turkle/preview.html:46
+msgid ""
+"Any changes will not be saved. You must accept the task first before working "
+"on it."
+msgstr ""
+
+#: turkle/templates/turkle/preview.html:56
+#: turkle/templates/turkle/task_assignment.html:103
+#, python-format
+msgid ""
+"<b>Project:</b> %(project_name)s /\n"
+"      <b>Batch:</b> %(batch_name)s"
+msgstr ""
+
+#: turkle/templates/turkle/preview_iframe.html:19
+msgid "You must ACCEPT the Task before you can submit the results."
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:73
+msgid "Full name"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:78
+msgid "Edit"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:101
+msgid "Bank Account Info"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:102
+msgid "Card Number"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:104
+msgid "Shaba"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:106
+msgid "Account Number"
+msgstr ""
+
+#: turkle/templates/turkle/profile.html:125
+msgid "No specialty has been selected."
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:96
+#, python-format
+msgid "Statistics for (%(full_name)s)"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:102
+msgid "Start Date"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:105
+#: turkle/templates/turkle/stats.html:134
+#, python-format
+msgid "%(start_date)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:108
+msgid "End Date"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:111
+#: turkle/templates/turkle/stats.html:134
+#, python-format
+msgid "%(end_date)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:130
+#, python-format
+msgid "Total Task Assignments: %(total_completed)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:138
+#, python-format
+msgid "Total Elapsed Time: %(total_elapsed_time)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:146
+#: turkle/templates/turkle/stats.html:176
+msgid "# Tasks"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:147
+msgid " Elapsed Time"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:148
+#: turkle/templates/turkle/stats.html:178
+msgid "Blank Answer's Count"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:160
+#, python-format
+msgid "%(total_completed_project)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:163
+#, python-format
+msgid "%(elapsed_time_project)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:166
+#, python-format
+msgid "%(blank_answers_project)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:177
+msgid "Elapsed Time"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:187
+#, python-format
+msgid "%(total_completed_batch)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:190
+#, python-format
+msgid "%(elapsed_time_batch)s"
+msgstr ""
+
+#: turkle/templates/turkle/stats.html:193
+#, python-format
+msgid "%(blank_answers_batch)s"
+msgstr ""
+
+#: turkle/templates/turkle/task_assignment.html:84
+msgid "Auto accept"
+msgstr ""
+
+#: turkle/templates/turkle/task_assignment.html:91
+msgid "Submit"
+msgstr ""
+
+#: turkle_site/settings.py:57
+msgid "Persian"
+msgstr ""
+
+#: turkle_site/settings.py:58
+msgid "English"
+msgstr ""

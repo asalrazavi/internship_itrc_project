@@ -1,0 +1,261 @@
+{% extends "admin/base_bootcamp.html" %}
+{% load static %}
+
+{% block header %}
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/datatables-1.10.24/datatables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+<link href="{% static 'turkle/datatables-1.10.24/datatables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+<style>
+.substat td {
+  padding-left: 2em;
+}
+
+#activity-calendar-container {
+  margin-bottom: 1em;
+}
+#batch-stats-container {
+  margin-bottom: 1em;
+}
+</style>
+<script>
+$(document).ready(function() {
+  $('#batch-stats').DataTable({
+    info: false,
+    paging: false,
+    searching: false
+  });
+
+  $('#user-stats').DataTable({
+    info: false,
+    paging: false,
+    searching: false
+  });
+
+  // Set startDate to include previous 11 months plus all of current month
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
+  var month = currentDate.getMonth(); // 0-indexed
+  month -= 11;
+  if (month < 0) {
+    month += 12;
+    year -= 1;
+  }
+  var startDate = new Date(year, month, 1);
+
+  var cal = new CalHeatMap();
+  cal.init({
+    itemSelector: "#activity-calendar",
+    data: "{% url 'admin:turkle_project_activity_json' project.id %}",
+    domain: "month",
+    subDomain: "day",
+    start: startDate,
+    weekStartOnMonday: false,
+  });
+});
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-2">
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <h2>Project Statistics</h2>
+
+  <div>
+    <table class="table table-sm table-bordered thead-light">
+      <tr>
+        <th class="column-large">Project Name</th>
+        <td>{{ project.name }}</td>
+      </tr>
+      <tr>
+        <th>Project Created by</th>
+        <td>{{ project.created_by.get_full_name }} ({{ project.created_by.username }})</td>
+      </tr>
+      <tr>
+        <th>Active?</th>
+        <td>{% if project.active %} Yes {% else %} No {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <th>First Assignment Completed at</th>
+        <td>{{ first_finished_time }}</td>
+      </tr>
+      <tr>
+        <th>Most Recent Assignment Completed at</th>
+        <td>{{ last_finished_time }}</td>
+      </tr>
+      <tr>
+        <th>Total Completed Assignments</th>
+        <td>{{ project_total_completed_assignments }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 24 hours</td>
+        <td>{{ project_total_completed_assignments_1_day }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 7 days</td>
+        <td>{{ project_total_completed_assignments_7_day }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 30 days</td>
+        <td>{{ project_total_completed_assignments_30_day }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 90 days</td>
+        <td>{{ project_total_completed_assignments_90_day }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 180 days</td>
+        <td>{{ project_total_completed_assignments_180_day }}</td>
+      </tr>
+      <tr class="substat">
+        <td>last 365 days</td>
+        <td>{{ project_total_completed_assignments_365_day }}</td>
+      </tr>
+      <tr>
+        <th>Total Work Time</th>
+        <td>{{ project_total_work_time }}</td>
+      </tr>
+      <tr>
+        <th>Mean Time / Assignment</th>
+        <td>{{ project_mean_work_time }}</td>
+      </tr>
+      <tr>
+        <th>Median Time / Assignment</th>
+        <td>{{ project_median_work_time }}</td>
+      </tr>
+      <tr>
+        <th>Total Not-Yet-Completed Assignments</th>
+        <td>
+          {{ uncompleted_tas_active_batches|add:uncompleted_tas_inactive_batches }}
+        </td>
+      </tr>
+      <tr class="substat">
+        <td>Active Batches</td>
+        <td>
+          {{ uncompleted_tas_active_batches }}
+        </td>
+      </tr>
+      <tr class="substat">
+        <td>Inactive Batches</td>
+        <td>
+          {{ uncompleted_tas_inactive_batches }}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Task Assignment Completion Activity</h2>
+
+  <div id="activity-calendar-container">
+    <div id="activity-calendar"></div>
+  </div>
+
+  <h2>Batch Statistics</h2>
+
+  <div id="batch-stats-container">
+    <table id="batch-stats" class="table table-sm table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Active</th>
+          <th># Assignments</th>
+          <th>Mean Time</th>
+          <th>Median Time</th>
+          <th>Most Recent Assignment</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stats_batch in stats_batches %}
+        <tr>
+          <td>
+            <a href="{% url 'admin:turkle_batch_stats' stats_batch.batch_id %}">
+              {{ stats_batch.name }}
+            </a>
+          </td>
+          <td>
+            {% if stats_batch.active %}
+              Y
+            {% else %}
+              N
+            {% endif %}
+          </td>
+          <td data-order="{{ stats_batch.assignments_completed_percentage }}">
+            <span class="float-left">
+              {{ stats_batch.assignments_completed }} /
+              {{ stats_batch.total_task_assignments }}
+            </span>
+            <span class="float-right" style="margin-right: 1em;">
+              <small>({{ stats_batch.assignments_completed_percentage }}%)</small>
+            </span>
+          </td>
+          {% if stats_batch.has_completed_assignments %}
+          <td data-order="{{ stats_batch.mean_work_time }}">
+            {{ stats_batch.mean_work_time }}s
+          </td>
+          <td data-order="{{ stats_batch.median_work_time }}">
+            {{ stats_batch.median_work_time }}s
+          </td>
+          <td data-order="{{ stats_batch.last_finished_time|date:"c" }}">
+            {{ stats_batch.last_finished_time }}
+          </td>
+          {% else %}
+          <td data-order="-1">{{ stats_batch.mean_work_time }}</td>
+          <td data-order="-1">{{ stats_batch.median_work_time }}</td>
+          <td>{{ stats_batch.last_finished_time }}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>User Statistics</h2>
+
+  <div>
+    <table id="user-stats" class="table table-sm table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Username</th>
+          <th>Name</th>
+          <th># Assignments</th>
+          <th>Mean Time</th>
+          <th>Median Time</th>
+          <th>Most Recent Assignment</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stats_user in stats_users %}
+        <tr>
+          <td>{{ stats_user.username }}</td>
+          <td>{{ stats_user.full_name }}</td>
+          <td>{{ stats_user.assignments_completed }}</td>
+          {% if stats_user.has_completed_assignments %}
+          <td data-order="{{ stats_user.mean_work_time }}">
+            {{ stats_user.mean_work_time }}s
+          </td>
+          <td data-order="{{ stats_user.median_work_time }}">
+            {{ stats_user.median_work_time }}s
+          </td>
+          <td data-order="{{ stats_user.last_finished_time| date:"c" }}">
+            {{ stats_user.last_finished_time }}
+          </td>
+          {% else %}
+          <td data-order="-1">{{ stats_user.mean_work_time }}</td>
+          <td data-order="-1">{{ stats_user.median_work_time }}</td>
+          <td>{{ stats_user.last_finished_time }}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /.container -->
+
+{% endblock %}

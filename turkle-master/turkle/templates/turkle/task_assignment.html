@@ -1,0 +1,121 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block head %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/jquery.countdown-2.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'turkle/script.js' %}"></script>
+<script>
+$(function () {
+  var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  });
+
+<!--  $('#update_auto_accept').click(function() {-->
+<!--    $.post("{% url 'update_auto_accept' %}", {'auto_accept': {% if auto_accept_status == true %}false {% else %}true{% endif%}});-->
+<!--  });-->
+
+  var expirationTime = new Date('{{ task_assignment.expires_at|date:'c' }}');
+  $("#expiration-timer").countdown(expirationTime)
+                        .on('update.countdown', function(event) {
+                          var format = '%I:%M';
+                          // if 3 full days left or more, display as days rather than hours:mins
+                          if (event.offset.totalDays > 2) {
+                            format = "%-D day%!D";
+                          }
+                          $(this).text(event.strftime('Expires in\n' + format));
+                        })
+                        .on('finish.countdown', function(event) {
+                          // "Gray out" background of iFrame
+                          $('#iframe_container').css('background', '#000');
+                          $('#task_assignment_iframe').css('background', '#fff')
+                                                     .css('opacity', '0.8');
+                          $('#messages_container').append(
+                            $('<div>').addClass('alert alert-error').attr('role', 'alert')
+                                      .text('Task Assignment has expired'));
+                        });
+
+  $('#task_assignment_iframe').focus();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid content row mr-0 ml-0 pr-0 pl-0" dir="{% if LANGUAGE_BIDI %}ltr{% else %}rtl{% endif %}">
+    <div class="col-2 order-2" style="position: relative;">
+        <div class="sticky mt-5">
+            <div class="mb-5">
+            <span id="expiration-timer"  style="font-size: 1em; color:#0F6CA5;font-weight: bold"></span>
+        </div>
+        <div class="mb-4 mt-5">
+            <form id="skip-form2" method="post" action="{% url 'skip_and_accept_next_task' task.batch_id task.id task_assignment.id %}">
+    {% csrf_token %}
+                <a id="skipButton2" class="my-button" onclick="skipFunc2()" style="color: #0A5684; cursor: pointer;font-size: 1.2rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                    <br>
+                    <span>{% trans "Skip Task" %}</span>
+                </a>
+  </form>
+        </div>
+        <div class="mb-4">
+            <form id="return-form" method="post" action="{% url 'return_task_assignment' task.id task_assignment.id %}">
+    {% csrf_token %}
+                <a id="returnButton" class="my-button" onclick="returnFunc()" style="color: #0A5684; cursor: pointer;font-size: 1.2rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#0a6584}</style><path d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"/></svg>
+                    <br>
+                    <span>{% trans "Return Task" %}</span>
+                </a>
+  </form>
+        </div>
+        </div>
+    <div class="text-center" style="position: fixed;bottom: 14%;{% if LANGUAGE_BIDI %}right: 0; left: 83%;{% else %}left: 0; right: 83%{% endif %}">
+                <input type="button" value="{% trans 'Auto accept' %}" id="update_auto_accept"
+         class="btn input-design {% if auto_accept_status %}btn-primary border-0{% endif %}" style="width: 60%;font-weight: bold;font-size: 1.4rem;border-radius: 10px; {% if not auto_accept_status %}color: #DC7403; background-color: #ffffff; border: 1px solid black{% endif %}" >
+            </div>
+    {% if not task.batch.project.html_template_has_submit_button %}
+    <div class="text-center" style="position: fixed;bottom: 3%;{% if LANGUAGE_BIDI %}right: 0; left: 83%;{% else %}left: 0; right: 83%{% endif %}">
+      <p class="text-center" style="vertical-align: center" >
+          <a id="submitButton" role="button" class="btn submit-button" style="width: 60%; font-weight: bold;font-size: 1.4rem;border-radius: 10px;background-color: #FF8601; color: #FFFFFF">
+              {% trans "Submit" %}
+          </a>
+      </p>
+            </div>
+    {% endif %}
+<div class="vertical-line"></div>
+</div>
+<div class="col-10">
+    <div class="project-header  clearfix border-0 mt-2 pr-0 pl-0"
+                 dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                <div class="{% if LANGUAGE_BIDI %}float-right{% else %}float-left{% endif %}">
+    <span style="color: #0A5684">
+     {% blocktrans with project_name=task.batch.project.name batch_name=task.batch.name %}<b>Project:</b> {{ project_name }} /
+      <b>Batch:</b> {{ batch_name }}{% endblocktrans %}
+    </span>
+                </div>
+    </div>
+<iframe src="{% url 'task_assignment_iframe' task.id task_assignment.id %}{{ http_get_params }}"
+            id="task_assignment_iframe">
+  </iframe>
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            document.getElementById('task_assignment_iframe').contentWindow.document.getElementById('mturk_form1').submit();
+    });
+    </script>
+</div>
+
+</div>
+{% endblock %}
+
+

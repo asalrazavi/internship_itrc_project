@@ -1,0 +1,858 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-01 11:17+0330\n"
+"PO-Revision-Date: 2023-08-09 08:36+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: turkle/admin.py:142
+#, python-format
+msgid "%d user was activated."
+msgid_plural "%d users were activated."
+msgstr[0] "%d کاربر فعال شدند."
+msgstr[1] "%d کاربر فعال شد."
+
+#: turkle/admin.py:154
+#, python-format
+msgid "%d user was deactivated."
+msgid_plural "%d users were deactivated."
+msgstr[0] "%d کاربر غیر فعال شدند."
+msgstr[1] "%d کاربر غیرفعال شد."
+
+#: turkle/admin.py:1467
+#, python-format
+msgid "%d  was successfully marked as paymented."
+msgid_plural "%d stories were successfully marked as published."
+msgstr[0] "%d با موفقیت به عنوان پرداخت شده علامت گذاری شد."
+msgstr[1] "%d با موفقیت به عنوان پرداخت شده علامت گذاری شدند."
+
+#: turkle/templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr "ادمین سایت جنگو"
+
+#: turkle/templates/admin/base_site.html:7
+msgid "Django administration"
+msgstr "مدیریت جنگو"
+
+#: turkle/templates/registration/login.html:5
+#: turkle/templates/turkle/SignUp.html:6 turkle/templates/turkle/base.html:6
+#, python-format
+msgid "%(turkle_site_name)s"
+msgstr "%(turkle_site_name)s"
+
+#: turkle/templates/registration/login.html:50
+#: turkle/templates/turkle/SignUp.html:51 turkle/templates/turkle/index.html:99
+msgid "Return"
+msgstr "بازگشت"
+
+#: turkle/templates/registration/login.html:74
+msgid "Please login to see this page."
+msgstr "لطفا برای مشاهده این صفحه وارد شوید."
+
+#: turkle/templates/registration/login.html:83
+#: turkle/templates/registration/login.html:94
+#: turkle/templates/turkle/base.html:190
+msgid "Login"
+msgstr "ورود"
+
+#: turkle/templates/registration/login.html:86
+#: turkle/templates/turkle/SignUp.html:60
+msgid "username"
+msgstr "نام کاربری"
+
+#: turkle/templates/registration/login.html:89
+#: turkle/templates/turkle/SignUp.html:69
+msgid "password"
+msgstr "گذرواژه"
+
+#: turkle/templates/registration/login.html:97
+#: turkle/templates/turkle/SignUp.html:58
+#: turkle/templates/turkle/SignUp.html:81
+msgid "Sign Up"
+msgstr "ثبت نام"
+
+#: turkle/templates/registration/login.html:102
+msgid "Reset your Password"
+msgstr "گذرواژه خود را تغییر دهید."
+
+#: turkle/templates/registration/password_change_done.html:14
+msgid "Your password was changed."
+msgstr "گذرواژه شما تغییر کرد"
+
+#: turkle/templates/registration/password_change_form.html:24
+msgid ""
+"Enter your current password and your new password twice for verification."
+msgstr ""
+"گذرواژه فعلی خود را وارد کنید. سپس گذرواژه جدید خود را برای اطمینان دو بار "
+"وارد کنید."
+
+#: turkle/templates/registration/password_change_form.html:31
+#, fuzzy
+#| msgid "Change Password"
+msgid "change password"
+msgstr "تغییر گذرواژه"
+
+#: turkle/templates/registration/password_reset_complete.html:13
+msgid "Your password has been reset.  You can log in now."
+msgstr "گذرواژه‌ی شما تغییر کرد. میتوانید وارد شوید."
+
+#: turkle/templates/registration/password_reset_complete.html:14
+msgid "Log in"
+msgstr "ورود"
+
+#: turkle/templates/registration/password_reset_confirm.html:16
+msgid "Please enter your new password twice."
+msgstr "لطفا گذرواژه جدید خود را دو بار وارد کنید."
+
+#: turkle/templates/registration/password_reset_confirm.html:25
+msgid "New password:"
+msgstr "گذر واژه جدید:"
+
+#: turkle/templates/registration/password_reset_confirm.html:36
+msgid "Confirm password:"
+msgstr "تایید گذرواژه:"
+
+#: turkle/templates/registration/password_reset_confirm.html:43
+msgid "Change my password"
+msgstr "تغییر گذرواژه"
+
+#: turkle/templates/registration/password_reset_confirm.html:48
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"لینک بازیابی گذرواژه نامعتبر است، احتمال استفاه قبلی از لینک وجود دارد. لطفا "
+"یک درخواست جدید برای بازیابی گذرواژه دهید."
+
+#: turkle/templates/registration/password_reset_done.html:13
+msgid ""
+"We've emailed instructions for resetting your password if an account exists "
+"with the email you entered. You should receive them shortly."
+msgstr ""
+"اگر ایمیلی که وارد کرده‌اید درست باشد، دستورات بازیابی گذرواژه را برای شما "
+"ارسال کرده‌ایم. به زودی آن‌ را را دریافت خواهید کرد."
+
+#: turkle/templates/registration/password_reset_done.html:15
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with and check your spam folder."
+msgstr ""
+"اگر ایمیلی دریافت نکرده‌اید، مطمعن شوید ایمیل خود را درست وارد کرده‌اید و "
+"همچنین اسپم ایمیل خود را چک کنید."
+
+#: turkle/templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_email.html:10
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: turkle/templates/registration/password_reset_form.html:14
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: turkle/templates/registration/password_reset_form.html:21
+msgid "Email address:"
+msgstr "آدرس ایمیل"
+
+#: turkle/templates/registration/password_reset_form.html:28
+msgid "Reset my password"
+msgstr ""
+
+#: turkle/templates/registration/register_phone_number.html:10
+msgid "Please enter your phone number"
+msgstr "لطفا شماره تلفن همراه خود را وارد کنید."
+
+#: turkle/templates/registration/register_phone_number.html:12
+#: turkle/templates/turkle/edit_profile.html:72
+#: turkle/templates/turkle/edit_profile.html:75
+#: turkle/templates/turkle/profile_edit_phone.html:18
+msgid "Phone number"
+msgstr "شماره تلفن همراه"
+
+#: turkle/templates/registration/register_phone_number.html:21
+msgid "Receive verification code"
+msgstr "دریافت کد تائید"
+
+#: turkle/templates/registration/verify_phone_number.html:10
+msgid "Please enter your code"
+msgstr "لطفا کد را وارد کنید."
+
+#: turkle/templates/registration/verify_phone_number.html:12
+msgid "Verification Code"
+msgstr "کد تائید"
+
+#: turkle/templates/registration/verify_phone_number.html:21
+msgid "Verify your phone number"
+msgstr "شماره تلفن خود را تائید کنید."
+
+#: turkle/templates/turkle/SignUp.html:63
+#: turkle/templates/turkle/edit_profile.html:52
+msgid "First name"
+msgstr "نام"
+
+#: turkle/templates/turkle/SignUp.html:66
+#: turkle/templates/turkle/edit_profile.html:55
+msgid "Last name"
+msgstr "نام خانوادگی"
+
+#: turkle/templates/turkle/SignUp.html:73
+msgid "password confirmation"
+msgstr "تائید گذرواژه"
+
+#: turkle/templates/turkle/SignUp.html:77
+#: turkle/templates/turkle/profile.html:75
+msgid "email"
+msgstr "ایمیل"
+
+#: turkle/templates/turkle/base.html:158
+msgid "Your Progress"
+msgstr "فعالیت‌های شما"
+
+#: turkle/templates/turkle/base.html:158
+msgid "Stats"
+msgstr "آمار"
+
+#: turkle/templates/turkle/base.html:163
+msgid "Administration"
+msgstr "مدیریت"
+
+#: turkle/templates/turkle/base.html:163
+msgid "Admin"
+msgstr "ادمین"
+
+#: turkle/templates/turkle/base.html:168
+msgid "Main Page"
+msgstr "صفحه اصلی"
+
+#: turkle/templates/turkle/base.html:168
+msgid "Home"
+msgstr "خانه"
+
+#: turkle/templates/turkle/base.html:173
+#, fuzzy, python-format
+#| msgid "username"
+msgid "%(username)s"
+msgstr "%(username)s"
+
+#: turkle/templates/turkle/base.html:178
+#, fuzzy
+#| msgid "Proficiency"
+msgid "Profile"
+msgstr "پروفایل"
+
+#: turkle/templates/turkle/base.html:179 turkle/templates/turkle/base.html:187
+#: turkle/templates/turkle/help.html:9
+msgid "Help"
+msgstr "راهنما"
+
+#: turkle/templates/turkle/base.html:181
+msgid "Logout"
+msgstr "خروج"
+
+#: turkle/templates/turkle/base.html:190
+msgid "Sign up"
+msgstr "ثبت نام"
+
+#: turkle/templates/turkle/edit_profile.html:46
+msgid "Personal information"
+msgstr "اطلاعات شخصی"
+
+#: turkle/templates/turkle/edit_profile.html:48
+#, fuzzy
+#| msgid "username"
+msgid "Username"
+msgstr "نام کاربری"
+
+#: turkle/templates/turkle/edit_profile.html:59
+msgid "Email address"
+msgstr "آدرس ایمیل"
+
+#: turkle/templates/turkle/edit_profile.html:62
+#: turkle/templates/turkle/edit_profile.html:78
+#: turkle/templates/turkle/edit_profile.html:100
+#: turkle/templates/turkle/edit_profile.html:121
+#: turkle/templates/turkle/profile_edit_bank.html:22
+#: turkle/templates/turkle/profile_edit_general.html:20
+#: turkle/templates/turkle/profile_edit_phone.html:22
+#: turkle/templates/turkle/profile_edit_proficiency.html:22
+msgid "Save changes"
+msgstr "ذخیره تغییرات"
+
+#: turkle/templates/turkle/edit_profile.html:88
+#: turkle/templates/turkle/profile_edit_bank.html:18
+msgid "Card Info"
+msgstr "اطلاعات شماره کارت بانکی"
+
+#: turkle/templates/turkle/edit_profile.html:91
+msgid "Bank card"
+msgstr "شماره کارت"
+
+#: turkle/templates/turkle/edit_profile.html:94
+#, fuzzy
+#| msgid "Phone number"
+msgid "Shaba number"
+msgstr "شبا"
+
+#: turkle/templates/turkle/edit_profile.html:97
+#, fuzzy
+#| msgid "Phone number"
+msgid "Account number"
+msgstr "شماره حساب"
+
+#: turkle/templates/turkle/edit_profile.html:112
+#: turkle/templates/turkle/profile.html:117
+#: turkle/templates/turkle/profile_edit_proficiency.html:18
+msgid "Proficiency"
+msgstr "تخصص"
+
+#: turkle/templates/turkle/help.html:14 turkle/templates/turkle/index.html:141
+msgid "Accept next Task"
+msgstr "پذیرش کار بعدی"
+
+#: turkle/templates/turkle/help.html:17
+msgid "The task is assigned to you."
+msgstr "کار به شما محول شده است."
+
+#: turkle/templates/turkle/help.html:18
+msgid ""
+"If you do not finish it, you will be reminded on the main page that you have "
+"abandoned the task."
+msgstr ""
+"مادامی که آن را تمام نکرده‌اید،‌ بر روی صفحه اصلی به شما یادآوری خواهد شد که "
+"کار را رها کرده‌اید."
+
+#: turkle/templates/turkle/help.html:19
+msgid ""
+"If you do not complete it by the deadline, it is returned to the task list."
+msgstr ""
+"و اگر کار را تا پایان زمان انقضای آن به اتمام نرسانید، کار به فهرست کارهای "
+"موجود برگردانده خواهد شد."
+
+#: turkle/templates/turkle/help.html:24
+msgid "Auto-accept next Task"
+msgstr "پذیرش کار بعدی به طور خودکار"
+
+#: turkle/templates/turkle/help.html:27
+msgid ""
+"Rather than being returned to the main page each time, the next task is "
+"automatically assigned to you."
+msgstr ""
+"در این حالت برای پذیرش کار بعدی، نیازی به بازگشت به صفحه‌ی اصلی نیست و کار "
+"بعدی به طور خودکار به شما محول می‌شود."
+
+#: turkle/templates/turkle/help.html:34
+#: turkle/templates/turkle/task_assignment.html:78
+msgid "Return Task"
+msgstr "لغو کار"
+
+#: turkle/templates/turkle/help.html:37
+msgid ""
+"Returns the currently assigned task so that it is no longer assigned to you."
+msgstr "کاری که به شما محول شده از فهرست کار جاری شما خارج می‌شود."
+
+#: turkle/templates/turkle/help.html:38
+msgid ""
+"If you accept a task from the same batch, that returned task could be "
+"assigned to you again."
+msgstr ""
+"اگر از همان دسته، کاری را پذیرش کنید، ممکن است کار برگردانده شده را دوباره "
+"به شما محول کند."
+
+#: turkle/templates/turkle/help.html:39
+msgid "If you do not want to work on that particular task, you should skip it."
+msgstr "اگر  نمیخواهید آن را انجام دهید،‌کافی است آن را رد کنید."
+
+#: turkle/templates/turkle/help.html:44 turkle/templates/turkle/preview.html:32
+#: turkle/templates/turkle/task_assignment.html:68
+msgid "Skip Task"
+msgstr "رد کردن کار"
+
+#: turkle/templates/turkle/help.html:47
+msgid "Skip to the next available task in the Batch."
+msgstr "به کار موجود بعدی در دسته می‌روید."
+
+#: turkle/templates/turkle/help.html:48
+msgid "The task is removed from your assignments."
+msgstr "کار از فهرست کارهای محول شده‌ی شما خارج می‌شود."
+
+#: turkle/templates/turkle/help.html:49
+msgid ""
+"You may see it again if all other tasks have been completed and no one else "
+"completed it."
+msgstr ""
+"اگر کارهای دیگر خود را تمام کرده باشید و فرد دیگری این کار را انجام نداده "
+"باشد،‌ این کار دوباره برای شما نمایش داده خواهد شد."
+
+#: turkle/templates/turkle/index.html:85
+#: turkle/templates/turkle/task_assignment_iframe.html:9
+msgid "Task"
+msgstr "کار"
+
+#: turkle/templates/turkle/index.html:87 turkle/templates/turkle/index.html:126
+#: turkle/templates/turkle/payment.html:25
+msgid "Project"
+msgstr "پروژه"
+
+#: turkle/templates/turkle/index.html:89 turkle/templates/turkle/index.html:132
+#: turkle/templates/turkle/payment.html:26
+msgid "Batch"
+msgstr "بسته"
+
+#: turkle/templates/turkle/index.html:95
+#, fuzzy
+#| msgid "continue"
+msgid "Continue"
+msgstr "ادامه"
+
+#: turkle/templates/turkle/index.html:133
+#: turkle/templates/turkle/payment.html:38
+#: turkle/templates/turkle/stats.html:184
+#, python-format
+msgid "%(batch_name)s"
+msgstr "%(batch_name)s"
+
+#: turkle/templates/turkle/index.html:134
+msgid "Batch Published"
+msgstr "بسته انتشار یافت"
+
+#: turkle/templates/turkle/index.html:136
+msgid "Tasks Available"
+msgstr "کارهای آماده"
+
+#: turkle/templates/turkle/index.html:137
+#, python-format
+msgid "%(assignments_available)s"
+msgstr "%(assignments_available)s"
+
+#: turkle/templates/turkle/index.html:138
+msgid "Preview next Task"
+msgstr "پیش‌نمایش کار بعدی"
+
+#: turkle/templates/turkle/index.html:165
+msgid "No Tasks available at this time"
+msgstr "در حال حاضر هیچ کاری موجود نیست"
+
+#: turkle/templates/turkle/index.html:169
+#, python-format
+msgid ""
+"You may need to <a href=\"%(the_url)s\">Login</a> to see available Tasks"
+msgstr ""
+"ممکن است برای مشاهده‌ی کارهای موجود باید <a href=\"%(the_url)s\">وارد</a> "
+"شوید."
+
+#: turkle/templates/turkle/payment.html:18
+#, python-format
+msgid "%(fullname)s"
+msgstr "%(fullname)s"
+
+#: turkle/templates/turkle/payment.html:27
+msgid "Task Count"
+msgstr "تعداد کارها"
+
+#: turkle/templates/turkle/payment.html:28
+msgid "Price"
+msgstr "قیمت"
+
+#: turkle/templates/turkle/payment.html:29
+msgid "Payment Status"
+msgstr "وضعیت پرداخت"
+
+#: turkle/templates/turkle/payment.html:30
+msgid "Paid At"
+msgstr "زمان پرداخت"
+
+#: turkle/templates/turkle/payment.html:35
+#: turkle/templates/turkle/stats.html:157
+#, python-format
+msgid "%(project_name)s"
+msgstr "%(project_name)s"
+
+#: turkle/templates/turkle/payment.html:41
+#, python-format
+msgid "%(task_count)s"
+msgstr "%(task_count)s"
+
+#: turkle/templates/turkle/payment.html:44
+#, python-format
+msgid "%(price)s"
+msgstr "%(price)s"
+
+#: turkle/templates/turkle/payment.html:48
+msgid "Paid"
+msgstr "پرداخت شده"
+
+#: turkle/templates/turkle/payment.html:50
+#: turkle/templates/turkle/payment.html:57
+msgid "-"
+msgstr "-"
+
+#: turkle/templates/turkle/payment.html:55
+#, python-format
+msgid "%(date)s"
+msgstr "%(date)s"
+
+#: turkle/templates/turkle/preview.html:22
+msgid "Accept Task"
+msgstr "انجام کار"
+
+#: turkle/templates/turkle/preview.html:40
+msgid "Stop Preview"
+msgstr "پایان پیش‌نمایش"
+
+#: turkle/templates/turkle/preview.html:45
+msgid "This is only a preview."
+msgstr "این فقط یک پیش‌نمایش است."
+
+#: turkle/templates/turkle/preview.html:46
+msgid ""
+"Any changes will not be saved. You must accept the task first before working "
+"on it."
+msgstr "هیچ تغییری دخیره نخواهد شد. برای انجام کار باید اول آن را بپذیرید."
+
+#: turkle/templates/turkle/preview.html:56
+#: turkle/templates/turkle/task_assignment.html:103
+#, python-format
+msgid ""
+"<b>Project:</b> %(project_name)s /\n"
+"      <b>Batch:</b> %(batch_name)s"
+msgstr "<b>پروژه:</b> %(project_name)s / <b>دسته:</b> %(batch_name)s"
+
+#: turkle/templates/turkle/preview_iframe.html:19
+msgid "You must ACCEPT the Task before you can submit the results."
+msgstr "شما باید قبل از ثبت پاسخ، ابتدا کار را بپذیرید."
+
+#: turkle/templates/turkle/profile.html:73
+#, fuzzy
+#| msgid "%(fullname)s"
+msgid "Full name"
+msgstr "نام و نام حانوادگی"
+
+#: turkle/templates/turkle/profile.html:78
+msgid "Edit"
+msgstr "ویرایش"
+
+#: turkle/templates/turkle/profile.html:101
+msgid "Bank Account Info"
+msgstr "اطلاعات حساب بانکی"
+
+#: turkle/templates/turkle/profile.html:102
+msgid "Card Number"
+msgstr "شماره کارت"
+
+#: turkle/templates/turkle/profile.html:104
+msgid "Shaba"
+msgstr "شبا"
+
+#: turkle/templates/turkle/profile.html:106
+#, fuzzy
+#| msgid "Phone number"
+msgid "Account Number"
+msgstr "شماره حساب"
+
+#: turkle/templates/turkle/profile.html:125
+msgid "No specialty has been selected."
+msgstr "هیچ تخصصی انتخاب نشده است."
+
+#: turkle/templates/turkle/stats.html:96
+#, fuzzy, python-format
+#| msgid "Statistics for %(full_name)s"
+msgid "Statistics for (%(full_name)s)"
+msgstr "گزارش آماری کاربر %(full_name)s"
+
+#: turkle/templates/turkle/stats.html:102
+#, fuzzy
+#| msgid "Start Date:"
+msgid "Start Date"
+msgstr "تاریخ شروع:"
+
+#: turkle/templates/turkle/stats.html:105
+#: turkle/templates/turkle/stats.html:134
+#, python-format
+msgid "%(start_date)s"
+msgstr "%(start_date)s"
+
+#: turkle/templates/turkle/stats.html:108
+#, fuzzy
+#| msgid "End Date:"
+msgid "End Date"
+msgstr "تاریخ پایان:"
+
+#: turkle/templates/turkle/stats.html:111
+#: turkle/templates/turkle/stats.html:134
+#, python-format
+msgid "%(end_date)s"
+msgstr "%(end_date)s"
+
+#: turkle/templates/turkle/stats.html:130
+#, python-format
+msgid "Total Task Assignments: %(total_completed)s"
+msgstr "تعداد کل کارهای پذیرش شده: %(total_completed)s"
+
+#: turkle/templates/turkle/stats.html:138
+#, python-format
+msgid "Total Elapsed Time: %(total_elapsed_time)s"
+msgstr "کل زمان سپری شده: %(total_elapsed_time)s"
+
+#: turkle/templates/turkle/stats.html:146
+#: turkle/templates/turkle/stats.html:176
+#, fuzzy
+#| msgid "Task"
+msgid "# Tasks"
+msgstr " تعداد کارها"
+
+#: turkle/templates/turkle/stats.html:147
+#, fuzzy
+#| msgid "Elapsed Time (Batch)"
+msgid " Elapsed Time"
+msgstr "زمان سپری شده"
+
+#: turkle/templates/turkle/stats.html:148
+#: turkle/templates/turkle/stats.html:178
+#, fuzzy
+#| msgid "Blank Answer's Count (Batch)"
+msgid "Blank Answer's Count"
+msgstr "پاسخ‌های خالی"
+
+#: turkle/templates/turkle/stats.html:160
+#, python-format
+msgid "%(total_completed_project)s"
+msgstr "%(total_completed_project)s"
+
+#: turkle/templates/turkle/stats.html:163
+#, python-format
+msgid "%(elapsed_time_project)s"
+msgstr "%(elapsed_time_project)s"
+
+#: turkle/templates/turkle/stats.html:166
+#, python-format
+msgid "%(blank_answers_project)s"
+msgstr "%(blank_answers_project)s"
+
+#: turkle/templates/turkle/stats.html:177
+#, fuzzy
+#| msgid "Elapsed Time (Batch)"
+msgid "Elapsed Time"
+msgstr "زمان سپری شده"
+
+#: turkle/templates/turkle/stats.html:187
+#, python-format
+msgid "%(total_completed_batch)s"
+msgstr "%(total_completed_batch)s"
+
+#: turkle/templates/turkle/stats.html:190
+#, python-format
+msgid "%(elapsed_time_batch)s"
+msgstr "%(elapsed_time_batch)s"
+
+#: turkle/templates/turkle/stats.html:193
+#, python-format
+msgid "%(blank_answers_batch)s"
+msgstr "%(blank_answers_batch)s"
+
+#: turkle/templates/turkle/task_assignment.html:84
+#, fuzzy
+#| msgid "Auto-accept next Task"
+msgid "Auto accept"
+msgstr "پذیرش خودکار"
+
+#: turkle/templates/turkle/task_assignment.html:91
+msgid "Submit"
+msgstr "ثبت"
+
+#: turkle_site/settings.py:57
+msgid "Persian"
+msgstr "فارسی"
+
+#: turkle_site/settings.py:58
+msgid "English"
+msgstr "انگلیسی"
+
+#, python-format
+#~ msgid "Logged in as <b>%(username)s</b>"
+#~ msgstr "به عنوان <b>%(username)s</b> وارد شده اید."
+
+#, python-format
+#~ msgid "%(batch_published)s"
+#~ msgstr "%(batch_published)s"
+
+#~ msgid "Payment"
+#~ msgstr "پرداخت‌ها"
+
+#~ msgid "Compute Statistics for Dates"
+#~ msgstr "محاسبه گزارش برای بازه انتخاب شده"
+
+#~ msgid "# Tasks (Project)"
+#~ msgstr "تعداد کارها (پروژه)"
+
+#~ msgid "# Tasks (Batch)"
+#~ msgstr "تعداد کارها (دسته)"
+
+#~ msgid " Elapsed Time (Project)"
+#~ msgstr " زمان سپری شده (پروژه)"
+
+#~ msgid "Blank Answer's Count (Project)"
+#~ msgstr "پاسخ‌های خالی (پروژه)"
+
+#, python-format
+#~ msgid "PROJECT: %(project_name)s"
+#~ msgstr "پروژه: %(project_name)s"
+
+#, python-format
+#~ msgid "BATCH: %(batch_name)s"
+#~ msgstr "دسته: %(batch_name)s"
+
+#~ msgid ""
+#~ "<b>Elapsed Time</b> is the time between when you Accept a Task\n"
+#~ "    Assignment and when you Submit that Task Assignment.  Elapsed Time\n"
+#~ "    is not the same thing as \"time worked\".  If you Accept a Task\n"
+#~ "    Assignment, leave for lunch, and then Submit the task after lunch,\n"
+#~ "    the amount of Elapsed Time will be longer than the amount of time\n"
+#~ "    you spent working on the Task."
+#~ msgstr ""
+#~ "<b>زمان سپری شده</b> زمان بین پذیرش یک تکلیف و ارسال آن تکلیف است. زمان "
+#~ "سپری شده همان \"زمان کار شده\" نیست. اگر یک تکلیف را بپذیرید، برای ناهار "
+#~ "ترک کنید و سپس کار را بعد از ناهار ارسال کنید، مقدار زمان سپری شده بیشتر "
+#~ "از مدت زمانی است که روی آن کار صرف کرده اید."
+
+#~ msgid "%(tag)s"
+#~ msgstr "%(tag)s"
+
+#~ msgid ""
+#~ "If you already have an account, <a href=\"%(the_url)s\">login</a> instead."
+#~ msgstr ""
+#~ "اگر از قبل یک حساب کاربری دارید، <a href=\"%(the_url)s\">وارد</a> شوید."
+
+#~ msgid ""
+#~ "\n"
+#~ "        You have abandoned <b>Task %(id)s</b> from Project "
+#~ "<b>%(project)s</b>, Batch <b>%(batch)s</b>\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "شما کار <b> %(id)s</b> را از پروژه  <b>%(project)s، دسته <b>%(batch)s</b> "
+#~ "رها کرده‌اید\n"
+#~ "      "
+
+#~ msgid "Resume working on Task"
+#~ msgstr "کار را ادامه دهید"
+
+#, fuzzy
+#~ msgid "Turkle"
+#~ msgstr "سامانه جمع سپاری پارسی‌آزما"
+
+#~ msgid "user"
+#~ msgstr "کاربر"
+
+#~ msgid "batch"
+#~ msgstr "بسته"
+
+#~ msgid "updated_at"
+#~ msgstr "تاریخ به روز رسانی"
+
+#~ msgid "rating"
+#~ msgstr "امتیاز"
+
+#~ msgid "count"
+#~ msgstr "تعداد"
+
+#~ msgid "completed"
+#~ msgstr "کامل شده"
+
+#~ msgid "assigned_to"
+#~ msgstr "اختصاص یافته به"
+
+#~ msgid "created_at"
+#~ msgstr "تاریخ ایجاد"
+
+#, fuzzy
+#~ msgid "expires_at"
+#~ msgstr "تاریخ انقضا"
+
+#~ msgid "task"
+#~ msgstr "کار"
+
+#~ msgid "Batches"
+#~ msgstr "بسته‌ها"
+
+#~ msgid "active"
+#~ msgstr "فعال"
+
+#~ msgid "allotted_assignments_time"
+#~ msgstr "زمان اختصاص یافته"
+
+#~ msgid "Assignments per Task"
+#~ msgstr "تکالیف در هر وظیفه"
+
+#~ msgid "creator"
+#~ msgstr "سازنده"
+
+#~ msgid "custom_permissions"
+#~ msgstr "مجوزهای سفارشی"
+
+#~ msgid "filename"
+#~ msgstr "نام فایل"
+
+#~ msgid "login_required"
+#~ msgstr "نیاز به ورود"
+
+#~ msgid "project"
+#~ msgstr "پروژه"
+
+#~ msgid "published"
+#~ msgstr "انتشاریافته"
+
+#~ msgid "allotted_assignment_time"
+#~ msgstr "زمان اختصاص یافته"
+
+#~ msgid "assignments_per_task"
+#~ msgstr "تکالیف در هر وظیفه"
+
+#~ msgid "html_template"
+#~ msgstr "نمونه html"
+
+#~ msgid "html_template_has_submit_button"
+#~ msgstr "نمونه html دکمه ثبت دارد"
+
+#~ msgid "updated_by"
+#~ msgstr "تاریخ به روز رسانی"
+
+#~ msgid "evaluation script"
+#~ msgstr "اسکریپت ارزیابی"
+
+#~ msgid "evaluation_threshold"
+#~ msgstr "آستانه ارزیابی"
+
+#~ msgid "calibration_limit"
+#~ msgstr "تعداد کار کالیبره"
+
+#~ msgid "calibration_rating"
+#~ msgstr "امتیاز کالیبره"

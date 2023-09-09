@@ -1,0 +1,118 @@
+{% extends "turkle/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+<style>
+@media (min-width: 768px ) and (max-width: 1599px)  {
+    .max-width-card {
+        max-width: 85rem;
+    }
+}
+@media (min-width: 768px) {
+    .max-width {
+        max-width: 18rem;
+    }
+}
+@media (max-width: 767px) {
+    .margin-0 {
+      margin: 0;
+    }
+    .max-width-card-mob {
+        max-width: 92vw;
+    }
+
+    .button-block {
+        display: block;
+    }
+    .container-margin {
+        margin-left: .5rem;
+        margin-right: .5rem;
+    }
+
+}
+
+@media (min-width: 1600px) {
+    .max-width-desk {
+        max-width: 87.2rem;
+    }
+    .max-width-container {
+        margin: 0;
+{#        {% if LANGUAGE_BIDI %}padding-right: 5.9rem;{% else %}padding-left: 5.9rem;{% endif %};#}
+    }
+}
+    .rtl {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .button-hover:hover {
+        background-color: #FFA500 !important;
+        border-color: #FFA500 !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="d-flex justify-content-center m-0 p-0 ">
+        <img class="img-fluid" src="{% static 'background2-1.jpg' %}" alt="background" style="max-height: 20rem; margin: 1rem 0 1rem 0;min-width: 88.3vw;border: 2px solid rgb(148 163 184)">
+    </div>
+<div class="d-flex justify-content-center m-0 p-0">
+    <div class="content-section row m-0 justify-content-md-between max-width-card-mob  {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="min-height:65vh;min-width: 88.3vw;">
+        <div class="card col-md-3 max-width col-sm-12 mb-2 position-sticky mt-md-2 {% if LANGUAGE_BIDI %} ml-md-5{% else %} mr-md-5{% endif %}" style=" height: fit-content;box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+             <div class="card-body {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                 <h3 class="card-title" style="color: #15006C">{{ username }}</h3>
+                 <h6 style="color: #15006C; margin-bottom: 0.1rem">{% trans "Full name" %}</h6>
+                 <p class="card-text" style="color: #0F6CA5; font-size: 1rem">{{ first_name }} {{ last_name }}</p>
+                 <h6 style="color: #15006C; margin-bottom: 0.1rem">{% trans "email" %}</h6>
+                 <p class="card-text" style="color: #0F6CA5; font-size: 1rem">{{ email }}</p>
+                 {% if user == request.user %}
+                     <a class="btn btn-primary btn-block button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" href="{% url 'edit_profile' %}">{% trans "Edit" %}</a>
+                 {% endif %}
+             </div>
+        </div>
+
+        {% csrf_token %}
+        <div class="media mt-2 col-md-9 col-sm-12 p-0">
+            <div class="media-body">
+                <div class="card mb-3 p-3 {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="p-3">
+                         <h3 style="color: #15006C; margin-bottom: 1rem">{% trans "Bank Account Info" %}</h3>
+                         <h6 style="color: #15006C; margin-bottom: 0.1rem">{% trans "Card Number" %}</h6>
+                         <p class="card-text" style="color: #0F6CA5; font-size: 1rem; margin-left: 0.5rem">{{ bank_account_info.card_number }}</p>
+                         <h6 style="color: #15006C; margin-bottom: 0.1rem">{% trans "Shaba" %}</h6>
+                         <p class="card-text" style="color: #0F6CA5; font-size: 1rem; margin-left: 0.5rem">{{ bank_account_info.shaba_number }}</p>
+                         <h6 style="color: #15006C; margin-bottom: 0.1rem">{% trans "Account Number" %}</h6>
+                         <p class="card-text" style="color: #0F6CA5; font-size: 1rem; margin-left: 0.5rem">{{ bank_account_info.account_number }}</p>
+                    </div>
+                </div>
+
+                <div class="card p-3 {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                    <div class="p-3">
+                        <h3 style="color: #15006C; margin-bottom: 1rem">{% trans "Proficiency" %}</h3>
+                        {% if proficiencies %}
+                        <ul>
+                            {% for proficiency in proficiencies %}
+                            <li style="color: #15006C"><span style="color: #0F6CA5">{{ proficiency }}</span></li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p style="color: #0F6CA5; font-size: 1rem; margin-left: 0.5rem">{% trans "No specialty has been selected." %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

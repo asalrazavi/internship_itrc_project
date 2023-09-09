@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html>
+  <head>
+    <title>{% blocktrans %}{{turkle_site_name}}{% endblocktrans %}</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {% load turkle_tags %}{% for tag in turkle_meta_tags %}{{ tag|meta_tag }}{% endfor %}
+    <link href="{% static "turkle/css/turkle.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="https://db.onlinewebfonts.com/c/0b0a8c345731751b990403a2cf40fbec?family=IRAN+Sans+Regular" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static "turkle/bootstrap-4.1.3/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "turkle/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" %}" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Add custom CSS to create a hollow dropdown arrow */
+        @media screen and (max-width: 768px) {
+            .rightText {
+                text-align: right;
+                margin-right: 1em;
+            }
+
+            .leftText {
+                margin-left: 1em;
+            }
+        }
+
+        .dropdown-item:active {
+            background-color: white;
+            color : black;
+        }
+
+        .dropdown-item:hover {
+            background-color: #EFF3FF;
+        }
+
+        .login-link>a {
+             color: #FF8601;
+        }
+
+        .sidebar {
+    min-height:100vh;
+    overflow:hidden;
+}
+
+
+.collapse.width {
+  width: 0;
+  max-width: 0;
+  height: 100%;
+  transition: max-width 0.3s linear;
+  display: block;
+  overflow: hidden;
+}
+
+.input-design:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+.vh-100 {
+    min-height: 100vh;
+}
+
+.collapsing.width {
+  transition:  max-width 0.7s linear;
+  width: 0 !important;
+  height: 100%;
+  max-width: 0 !important;
+  min-width: 0;
+  position: relative;
+  display: block;
+}
+
+.collapse.width.show {
+  transition:  max-width 0.3s linear;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+  display: block;
+}
+
+.sticky {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+.vertical-line {
+  position: fixed;
+  top: 0;
+    z-index: -1;
+    {% if LANGUAGE_BIDI %}left: 83%;{% else %}right: 83%;{% endif %}
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 1px;
+}
+
+.my-button>svg {
+    transition-duration: 0.4s;
+}
+.my-button>svg:hover {
+    fill: #189DED;
+
+}
+
+/* Assuming .dropdown-menu is the class for the dropdown menu */
+.dropdown-menu {
+  max-width: 100%; /* Constrain the width of the dropdown menu */
+}
+
+/* Optional: Reset padding and margins for the dropdown menu if necessary */
+.dropdown-menu {
+  margin: 0;
+  padding: 0;
+}
+
+
+    </style>
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body style="font-family:Sans-Serif,serif">
+    <div class="container-fluid header pl-0 pr-0 " dir="{% if LANGUAGE_BIDI %}ltr{% else %}rtl{% endif %}">
+      <nav id="navbar_top" class="navbar navbar-light navbar-expand-lg p-0 pt-1 pb-1" style="{% if user.is_authenticated %}box-shadow: 0 4px 5px 1px rgba(15, 108, 165, 0.15);background-color: white{% endif %}">
+      <a class="navbar-brand mr-0" href="{% url 'index' %}">
+    <img class="pb-0 {% if LANGUAGE_BIDI %}mr-0 ml-5{% else %}mr-5 ml-0{% endif %}" src="{% static 'img2.png' %}" style="height: 40px;" alt="logo">
+  </a>
+      {% get_current_language as CURRENT_LANGUAGE %}
+            {% get_available_languages as AVAILABLE_LANGUAGES %}
+            {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+            <span class="languages {% if LANGUAGE_BIDI %}pl-3{% else %}pr-3{% endif %}">
+                <a href="/{{ languages.1.code }}/" style="color: #FF8601; font-weight: bold; font-size: 1.2rem"
+                   {% if languages.1.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
+                   {{ languages.1.code}}
+                </a>
+            <span style="color: #FF8601; font-weight: bold; font-size: 1.2rem">/</span>
+            <a href="/{{ languages.0.code }}/" style="color: #FF8601; font-weight: bold; font-size: 1.2rem"
+            {% if languages.0.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
+                   {{ languages.0.code}}
+                </a>
+            </span>
+      <button class="navbar-toggler {% if LANGUAGE_BIDI %}ml-auto mr-2{% else %}mr-auto ml-2{% endif %}"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="{% if LANGUAGE_BIDI %}navbar-nav ml-auto {% else %}navbar-nav mr-auto{% endif %} navbar-right" style="color: rgba(15, 108, 165, 1);font-weight: bolder;font-size: 1.1rem;{% if LANGUAGE_BIDI %}padding-inline-start: 1%{% endif %};{% if not LANGUAGE_BIDI %}padding-inline-start: 1%{% endif %};">
+          {% if user.is_authenticated %}
+          <li class="nav-item active" style="font-size: 1.2rem">
+            <a class="nav-link mt-1 {% if LANGUAGE_BIDI %}rightText {% else %}leftText{% endif %}" href="{% url 'stats' %}" title="{% trans 'Your Progress' %}">{% trans "Stats" %}</a>
+          </li>
+          {% endif %}
+          {% if user.is_staff %}
+          <li class="nav-item active" style="font-size: 1.2rem">
+            <a class="nav-link mt-1  {% if LANGUAGE_BIDI %}ml-4 rightText{% else %}mr-4 leftText{% endif %}" href="{% url 'admin:index' %}" title="{% trans 'Administration' %}">{% trans "Admin" %}</a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+              <li class="nav-item active" style="font-size: 1.2rem">
+            <a class="nav-link mt-1 {% if LANGUAGE_BIDI %}rightText ml-4{% else %}leftText mr-4{% endif %}" href="{% url 'index' %}" title="{% trans 'Main Page' %}">{% trans "Home" %}</a>
+          </li>
+          <li class="nav-item dropdown dropdown-menu-right {% if LANGUAGE_BIDI %}ml-md-4{% else %}mr-md-4{% endif %}">
+                  <a href="#" class="nav-link dropdown-button {% if LANGUAGE_BIDI %}rightText{% else %}leftText{% endif %}" style="font-size: 1.4rem; color:#FF8601"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-angle-down"></i>
+                      {% blocktrans with username=user.username %}{{ username }}{% endblocktrans %}
+                  <i class="fa fa-user-circle-o opacity-8" aria-hidden="true" style="font-size: 1.6rem"></i>
+
+                  </a>
+                  <div class="dropdown-menu {% if LANGUAGE_BIDI %}text-right{% endif %}" id="dropdown" style="{% if LANGUAGE_BIDI %}left: -20%{% endif %};z-index: 5" >
+                    <a href="{% url 'profile' request.user.username %}" class="dropdown-item" style="{% if not LANGUAGE_BIDI %}padding:0.25rem 1rem{% endif %}">{% trans "Profile" %}</a>
+                    <a href="{% url 'help' %}" class="dropdown-item" style="{% if not LANGUAGE_BIDI %}padding:0.25rem 1rem{% endif %}">{% trans "Help" %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'logout' %}?next={% url 'index' %}" class="dropdown-item" style="{% if not LANGUAGE_BIDI %}padding:0.25rem 1rem{% endif %}">{% trans "Logout" %}</a>
+                  </div>
+                </li>
+            {% endif %}
+          {% if not user.is_authenticated %}
+         <li class="nav-item active" style="font-size: 1.2rem">
+           <a href="{% url 'help' %}" class="nav-link {% if LANGUAGE_BIDI %}mr-md-4 rightText{% else %}ml-md-4 leftText{% endif %} mt-1">{% trans "Help" %}</a>
+          </li>
+        <li class="nav-item">
+            <a class="btn btn-primary {% if LANGUAGE_BIDI %}mr-md-4 rightButton{% else %}ml-md-4 leftButton{% endif %} mt-2" style="font-weight: bold; border-radius: 25px;" href="{% url 'login' %}" role="button">{% trans "Login" %} / {% trans "Sign up" %}</a>
+        </li>
+          {% endif %}
+        </ul>
+
+          </div>
+      </nav>
+      {% block subheader %}
+      {% endblock %}
+
+      <div id="messages_container">
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.level_tag }}" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+      </div>
+    </div><!-- /container-fluid -->
+
+    {% block body %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+  <script>
+       var stickyDiv = document.querySelector(".sticky");
+       stickyDiv.style.top = window.pageYOffset + "px";
+window.addEventListener("scroll", function() {
+  stickyDiv.style.top = window.pageYOffset + "px";
+});
+      document.addEventListener("DOMContentLoaded", function(){
+  window.addEventListener('scroll', function() {
+      var navbar_height;
+      if (window.scrollY > 25) {
+          document.getElementById('navbar_top').classList.add('fixed-top');
+          // add padding top to show content behind navbar
+          navbar_height = document.querySelector('.navbar').offsetHeight;
+          document.body.style.paddingTop = navbar_height + 'px';
+      } else {
+          document.getElementById('navbar_top').classList.remove('fixed-top');
+          // remove padding top from body
+          document.body.style.paddingTop = '0';
+      }
+  });
+});
+      window.addEventListener("DOMContentLoaded", function() {
+  var verticalLine = document.querySelector(".vertical-line");
+
+  function setVerticalLineHeight() {
+    var pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+    verticalLine.style.height = `${pageHeight}px`;
+  }
+
+  // Set initial line height
+  setVerticalLineHeight();
+
+  // Recalculate line height when the window is resized
+  window.addEventListener("resize", setVerticalLineHeight);
+});
+      function acceptFunc() {
+                document.getElementById("accept-form").submit();
+            }
+       function skipFunc1() {
+                document.getElementById("skip-form1").submit();
+            }
+       function skipFunc2() {
+                document.getElementById("skip-form2").submit();
+            }
+       function returnFunc() {
+                document.getElementById("return-form").submit();
+            }
+            function submitFunc() {
+  $("#mturk_form").submit();
+}
+$("#submitButton").click(function() {
+  submitFunc();
+});
+           document.addEventListener('DOMContentLoaded', function() {
+    // Get all elements with 'data-toggle' attribute and loop through them
+               var tooltipElements = document.querySelectorAll('[data-toggle="tooltip"]');
+               for (let i = 0; i < tooltipElements.length; i++) {
+      // Initialize Bootstrap tooltip for each element
+        var tooltipElement = tooltipElements[i];
+        var tooltipTitle = tooltipElement.getAttribute('data-original-title');
+        new bootstrap.Tooltip(tooltipElement, { title: tooltipTitle});
+    }
+  });
+      var autoAcceptStatus = {% if auto_accept_status %} true; {% else %} false {% endif %};
+
+    const button = document.getElementById('update_auto_accept');
+    button.addEventListener('click', function () {
+        autoAcceptStatus = !autoAcceptStatus;
+        if (autoAcceptStatus) {
+            button.classList.add('btn-primary');
+            button.style.color = 'white';
+            button.classList.add('border-0');
+            button.style.backgroundColor = ''; // Reset background color to default (remove inline style)
+            $.post("{% url 'update_auto_accept' %}", {'auto_accept': true});
+        } else {
+            button.classList.remove('btn-primary');
+            button.style.color = '#DC7403';
+            button.classList.remove('border-0');
+            button.style.backgroundColor = '#ffffff'; // Set the unchecked background color
+            $.post("{% url 'update_auto_accept' %}", {'auto_accept': false});
+        }
+    });
+  </script>
+  </body>
+</html>

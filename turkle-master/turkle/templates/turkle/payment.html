@@ -1,0 +1,67 @@
+{% extends "turkle/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-5" align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+
+  <h2 style="color: #15006C" align="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">{% blocktrans %}{{ fullname }}{% endblocktrans %}</h2>
+  <hr>
+
+  <div>
+    <table class="table table-responsive-sm"  dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border:1px solid rgba(0, 0, 0, 0.25)">
+    <thead>
+        <tr style="background-color: #517FB9;color: white">
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Project" %}</th>
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Batch" %}</th>
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Task Count" %}</th>
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Price" %}</th>
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Payment Status" %}</th>
+        <th scope="col" style="text-align: center;vertical-align: center">{% trans "Paid At" %}</th>
+      </tr>
+    </thead>
+      {% for data in payment_data %}
+      <tr>
+        <td style="text-align: center">
+          {% blocktrans with project_name=data.project_name %}{{ project_name }}{% endblocktrans %}
+        </td>
+        <td style="text-align: center">
+          {% blocktrans with batch_name=data.batch_name %}{{ batch_name }}{% endblocktrans %}
+        </td>
+        <td style="text-align: center">
+          {% blocktrans with task_count=data.task_count %}{{ task_count }}{% endblocktrans %}
+        </td>
+        <td style="text-align: center">
+          {% blocktrans with price=data.salary %}{{ price }}{% endblocktrans %}
+        </td>
+        <td style="text-align: center">
+          {% if data.payment_status %}
+          {% trans "Paid" %}
+          {% else %}
+          {% trans "-" %}
+          {% endif %}
+        </td>
+        <td style="text-align: center">
+          {% if data.paymented_at %}
+          {% blocktrans with date=data.paymented_at %}{{ date }}{% endblocktrans %}
+          {% else %}
+          {% trans "-" %}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</div>
+{% endblock %}

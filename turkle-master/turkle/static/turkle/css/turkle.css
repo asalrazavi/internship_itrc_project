@@ -1,0 +1,76 @@
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-flow: column;
+}
+.content {
+  flex: 1;
+}
+.project-header {
+  padding: 5px 16px;
+  border-top: 7px solid #373b44;
+  border-bottom: 2px solid #373b44;
+}
+/* --- There are five Django messages alert levels:
+       - debug, info, success, warning, error
+       We want to map these alert levels to Bootstrap 'alert-*' classes.
+       Bootstrap already has 'alert-info', 'alert-success' and 'alert-warning'
+       classes, so we add 'alert-debug' and 'alert-error'
+ */
+/* --- alert-debug colors copied from Bootstrap's alert-light class  */
+.alert-debug {
+  color: #818182;
+  background-color: #fefefe;
+  border-color: #fdfdfe;
+}
+/* --- alert-error colors copied from Bootstrap's alert-danger class  */
+.alert-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.inline-form-buttons {
+  display: inline-block;
+}
+.inline-form-buttons > form,
+.inline-form-buttons > a[role="button"] {
+  display: inline-block;
+  margin-left: 1em;
+}
+.column-large {
+  width: 50%;
+}
+iframe {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-sizing: inherit;
+  display: block;
+}
+
+div.task-preview {
+  background: #000;
+  height: 100%;
+  display: block;
+}
+.task-preview iframe {
+  background: #fff;
+  opacity: 0.8;
+}
+
+@font-face {
+    font-family: "IRAN Sans Regular";
+    src: url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.eot");
+    src: url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/0b0a8c345731751b990403a2cf40fbec.svg#IRAN Sans Regular")format("svg");
+}
+

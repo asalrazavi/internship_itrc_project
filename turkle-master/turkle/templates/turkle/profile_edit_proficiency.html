@@ -1,0 +1,25 @@
+{% extends "turkle/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <h3>{% trans "Proficiency" %}</h3>
+    {{ proficiency_form }}
+    <hr>
+    <div>
+        <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/parsley-2.9.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/turkle-file-upload.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/turkle-admin.js' %}"></script>
+<script>
+$(document).ready(function() {
+  $('#batch_form').parsley();
+});
+</script>
+{% endblock %}
+
+{% block submit_buttons_bottom %}
+{% if add %}
+<div class="submit-row">
+  <input type="submit" value="Review Batch" name="_saveasnew" />
+</div>
+{% elif not object_id %}
+{% comment %}
+   There was a form validation error while trying to Add a Batch.
+   The Batch has not been saved yet.  Following the example from:
+     django/contrib/admin/templates/admin/submit_line.html
+   We add a "Delete" link that just reloads the page.
+{% endcomment %}
+<div class="submit-row">
+  <p class="deletelink-box"><a href="" class="deletelink">Delete</a></p>
+  <input type="submit" value="Review Batch" name="_saveasnew" />
+</div>
+{% elif not published %}
+{% comment %}
+  Requester reviewed the batch did did not publish so we show the review button
+{% endcomment %}
+<div class="submit-row">
+  <p class="deletelink-box"><a href="" class="deletelink">Delete</a></p>
+  <input type="submit" value="Review Batch" name="_save" />
+</div>
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endblock %}

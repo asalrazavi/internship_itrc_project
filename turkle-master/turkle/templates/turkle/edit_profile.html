@@ -1,0 +1,135 @@
+{% extends "turkle/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<style>
+    .input-design:focus {
+        outline: none !important;
+        box-shadow: none;
+        }
+
+    .input-design {
+        outline: none !important;
+        box-shadow: none;
+    }
+
+    .rtl {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .button-hover:hover {
+        background-color: #FFA500 !important;
+        border-color: #FFA500 !important;
+    }
+</style>
+<div class="d-flex flex-column align-items-center {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+    <div class="col-md-10">
+    <div class="row">
+        <div class="align-items-stretch">
+            <div class="col-md-12">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <form class="mt-5 mb-4 card p-5" method="post" action="{% url 'edit_profile_general' %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border: 1px solid #ffffff; border-radius: 25px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                        {% csrf_token %}
+                        <h3 style="color: #15006C">{% trans "Personal information" %}</h3>
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="text" name="username" id="username" placeholder="{% trans "Username" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ user_form.username.value }}">
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="form-group d-flex flex-column align-items-start" style="{% if LANGUAGE_BIDI %}margin: 0 0 0 4.7rem;{% else %}margin: 0 3rem 0 0;{% endif %}">
+                                <input type="text" name="first_name" id="first_name" placeholder="{% trans "First name" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ user_form.first_name.value }}">
+                            </div>
+                            <div class="form-group d-flex flex-column align-items-start">
+                                <input type="text" name="last_name" id="last_name" placeholder="{% trans "Last name" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ user_form.last_name.value }}">
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="email" name="email" id="email" placeholder="{% trans "Email address" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ user_form.email.value }}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div style="{% if LANGUAGE_BIDI %}margin: 0 0 0 1rem;{% else %}margin: 0 1rem 0 0;{% endif %}">
+                                <button class="btn btn-primary button-hover " style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit">{% trans "Save changes" %}</button>
+                            </div>
+                            <div>
+                                <a href="{% url 'password_change' %}" class="btn btn-primary button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit">{% trans "Change Password" %}</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <form class="mt-4 mb-4 card p-5 h-100" method="post" action="{% url 'edit_profile_phone' %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border: 1px solid #ffffff; border-radius: 25px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+                        {% csrf_token %}
+                        <h3  style="color: #15006C">{% trans "Phone number" %}</h3>
+                {#        {{ phone_number_form }}#}
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="text" name="phone_number" id="phone_number" placeholder="{% trans "Phone number" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ phone_number_form.phone_number.value }}">
+                        </div>
+                        <div>
+                            <button  class="btn btn-primary button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit">{% trans "Save changes" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <form class="mt-4 mb-4 card p-5" method="post" action="{% url 'edit_profile_bank' %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border: 1px solid #ffffff; border-radius: 25px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+                        {% csrf_token %}
+                        <h3  style="color: #15006C">{% trans "Card Info" %}</h3>
+                {#        {{ bank_info_form.as_p }}#}
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="text" name="bank_card" id="bank_card" placeholder="{% trans "Bank card" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ bank_info_form.bank_card.value }}">
+                        </div>
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="text" name="shaba_number" id="shaba_number" placeholder="{% trans "Shaba number" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ bank_info_form.shaba_number.value }}">
+                        </div>
+                        <div class="form-group d-flex flex-column align-items-start">
+                            <input type="text" name="account_number" id="account_number" placeholder="{% trans "Account number" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus value="{{ bank_info_form.account_number.value }}">
+                        </div>
+                        <div>
+                            <button  class="btn btn-primary button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit">{% trans "Save changes" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="align-items-stretch" style="min-width: 390.4px; width: 612.4px">
+            <div class="col-md-12">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <form class="mt-5 mb-4 card p-5" method="post" action="{% url 'edit_profile_proficiency' %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border: 1px solid #ffffff; border-radius: 25px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+                        {% csrf_token %}
+                        <h3 style="color: #15006C">{% trans "Proficiency" %}</h3>
+                {#      {{ proficiency_form }}#}
+                        {% for field in proficiency_form %}
+                            <div class="form-group mb-1">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                <input type="checkbox" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-check-input ml-2" {% if field.value %}checked{% endif %} style="{% if LANGUAGE_BIDI %}margin: 0.4rem 0.5rem 0 0;{% else %}margin: 0.4rem 0 0 0.5rem;{% endif %}">
+                            </div>
+                        {% endfor %}
+                        <div>
+                            <button class="btn btn-primary button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit">{% trans "Save changes" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

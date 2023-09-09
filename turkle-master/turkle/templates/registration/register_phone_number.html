@@ -1,0 +1,26 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+
+{% block body %}
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="col-md-4 offset-md-4" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+    <div class="panel panel-primary">
+      <div>{% trans "Please enter your phone number" %}</div>
+      <div class="form-group" align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+        <label for="phone">{% trans "Phone number" %}</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text flip"><i class="glyphicon glyphicon-user" ></i></span>
+          </div>
+          <input type="text" name="phone" id="phone" class="form-control" required="required" autofocus>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary form-control" type="submit" >{% trans "Receive verification code" %}</button>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

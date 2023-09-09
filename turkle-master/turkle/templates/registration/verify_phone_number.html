@@ -1,0 +1,72 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+
+{% block body %}
+<style>
+    .rtl {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .button-hover:hover {
+        background-color: #FFA500 !important;
+        border-color: #FFA500 !important;
+    }
+</style>
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-4 d-flex align-items-center">
+            <form method="POST" class="mt-4 mb-4 card p-5" style="border: 1px solid #ffffff; border-radius: 25px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1)">
+                {% csrf_token %}
+                <h3 class="mb-3" style="color: #15006C">{% trans "Please enter your code" %}</h3>
+                <div class="form-group d-flex flex-column align-items-start mb-4">
+                    <input type="text" name="code" id="code" placeholder="{% trans "Verification Code" %}" class="form-control d-flex flex-column align-items-start bg-transparent border-left-0 border-right-0 border-top-0 rounded-0 input-design" style="border-bottom: 1px solid rgba(0, 0, 0, 0.78)" required="required" autofocus>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary form-control button-hover" style="background-color: #0F6CA5; border-color: #0F6CA5" type="submit" >{% trans "Verify your phone number" %}</button>
+                </div>
+                <p style="color: #15006C" id="timer">Time remaining: 2:00</p>
+                <button id="startTimer" style="display: none;"></button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    let countdown;
+    const timerDisplay = document.getElementById('timer');
+
+    window.onload = startTimer;  // Start the timer as soon as the page loads
+
+    function startTimer() {
+        if (countdown) {
+            clearTimeout(countdown);
+        }
+
+        countdown = setTimeout(() => {
+            alert('Time is up. You did not fill in the phone number.');
+        }, 2 * 60 * 1000); // 2 minutes in milliseconds
+
+        updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+        let timeLeft = 2 * 60; // 2 minutes in seconds
+        timerDisplay.textContent = `Time remaining: ${formatTime(timeLeft)}`;
+
+        const interval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Time remaining: ${formatTime(timeLeft)}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+            }
+        }, 1000); // Update the display every second
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
+</script>
+{% endblock %}

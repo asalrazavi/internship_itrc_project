@@ -1,0 +1,69 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid content row mr-0 ml-0 pr-0 pl-0"
+         dir="{% if LANGUAGE_BIDI %}ltr{% else %}rtl{% endif %}">
+        <div class="col-2 order-2" style="position: relative;">
+        <div class="sticky mt-5">
+            <div class="mb-4">
+                <form id="accept-form" method="post" action="{% url 'accept_task' task.batch_id task.id %}">
+            {% csrf_token %}
+                    <a id="acceptButton" class="my-button" onclick="acceptFunc()" style="color: #0A5684; cursor: pointer;font-size: 1.2rem">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#0a5684}</style><path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/></svg>
+                        <br>
+                        <span>{% trans "Accept Task" %}</span>
+                    </a>
+        </form>
+            </div>
+              <div class="mb-4">
+                 <form id="skip-form1" method="post" action="{% url 'skip_task' task.batch_id task.id %}">
+            {% csrf_token %}
+                     <a id="skipButton1" class="my-button"  onclick="skipFunc1()" style="color: #0A5684; cursor: pointer;font-size: 1.2rem">
+                         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                         <br>
+                         <span>{% trans "Skip Task" %}</span>
+                     </a>
+        </form>
+              </div>
+             <div class="mb-4">
+                <a href="{% url 'index' %}" class="my-button" role="button" style="color: #0A5684; cursor: pointer;font-size: 1.2rem;text-decoration: none">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>
+                    <br>
+                    <span>{% trans "Stop Preview" %}</span>
+                </a></div>
+        </div>
+        <div class="text-center" style="position: fixed;bottom: 3%;{% if LANGUAGE_BIDI %}right: 0; left: 83%;{% else %}left: 0; right: 83%{% endif %}">
+                <div class=" my-2" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                <h2 class="text-center" style="color: #0a5684">{% trans "This is only a preview." %}</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512" data-toggle="tooltip" data-placement="{% if LANGUAGE_BIDI %}up{% else %}right{% endif %}" data-original-title="{% trans "Any changes will not be saved. You must accept the task first before working on it." %}"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#0a5684}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>
+            </div>
+            </div>
+        <div class="vertical-line"></div>
+        </div>
+        <div class="col-10">
+            <div class="project-header  clearfix border-0 mt-2 pr-0 pl-0"
+                 dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                <div class="{% if LANGUAGE_BIDI %}float-right{% else %}float-left{% endif %}">
+    <span style="color: #0A5684">
+     {% blocktrans with project_name=task.batch.project.name batch_name=task.batch.name %}<b>Project:</b> {{ project_name }} /
+      <b>Batch:</b> {{ batch_name }}{% endblocktrans %}
+    </span>
+                </div>
+            </div>
+            <div class="task-preview">
+                <iframe src="{% url 'preview_iframe' task.id %}{{ http_get_params }}"
+                        id="task_assignment_iframe">
+                </iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

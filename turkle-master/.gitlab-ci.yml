@@ -1,0 +1,38 @@
+python3-stylecheck:
+  image: python:3.6-alpine
+  stage: test
+  script:
+    - pip install flake8
+    - flake8
+  tags:
+    - docker
+
+python3-tests:
+  image: python:3.6-alpine
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python manage.py test
+  tags:
+    - docker
+
+docker-build:
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+  script:
+    - docker build -t turkle -f Dockerfile-sqlite .
+    - docker build -t turkle.mysql -f Dockerfile-MySQL .
+  tags:
+    - docker
+
+docs:
+  image: python:3.6-alpine
+  stage: test
+  script:
+    - pip install sphinx sphinx_rtd_theme
+    - sphinx-build -M html docs _built_docs -W
+  tags:
+    - docker

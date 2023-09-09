@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load static %}
+{% block head %}
+    <script type="text/javascript" src="{% static 'turkle/script.js' %}"></script>
+{% endblock %}
+<html>
+  <head>
+    <title>{% trans "Task" %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    {% load static %}
+  </head>
+  <body>
+    <form name="mturk_form" method="post" id="mturk_form1" target="_parent"
+          action="{% url 'task_assignment' task.id task_assignment.id %}"
+          data-iframe-height="">
+
+      {% csrf_token %}
+      {% autoescape off %}{{ task.populate_html_template }}{% endautoescape %}
+
+    </form>
+  </body>
+</html>

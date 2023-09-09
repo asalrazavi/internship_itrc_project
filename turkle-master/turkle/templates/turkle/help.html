@@ -1,0 +1,55 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+{% load static %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% block body %}
+
+<div class="container mt-4">
+<br>
+  <h2 class="text-center" style="color: rgba(0, 0, 0, 0.78)">{% trans "Help" %}</h2>
+    <br>
+  <div class="row {% if LANGUAGE_BIDI %}text-right{% else %}text-left{% endif %}">
+    <div class="col-sm m-2" style="border: 3px solid rgba(171, 170, 170, 0.5); border-radius: 10px">
+    <br>
+      <h5 class="{% if LANGUAGE_BIDI %}text-right{% else %}text-left{% endif %}" style="color: #0F6CA5">{% trans "Accept next Task" %}</h5>
+      <br>
+      <p style="direction: {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+        {% trans "The task is assigned to you." %}
+        {% trans "If you do not finish it, you will be reminded on the main page that you have abandoned the task." %}
+        {% trans "If you do not complete it by the deadline, it is returned to the task list." %}
+      </p>
+    </div>
+    <div class="col-sm m-2" style="border: 3px solid rgba(171, 170, 170, 0.5); border-radius: 10px">
+    <br>
+      <h5 class="{% if LANGUAGE_BIDI %}text-right{% else %}text-left{% endif %}" style="color: #0F6CA5">{% trans "Auto-accept next Task" %}</h5>
+      <br>
+      <p style="direction: {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+        {% trans "Rather than being returned to the main page each time, the next task is automatically assigned to you." %}
+      </p>
+    </div>
+  </div>
+  <div class="row {% if LANGUAGE_BIDI %}text-right{% else %}text-left{% endif %}">
+    <div class="col-sm m-2" style="border: 3px solid rgba(171, 170, 170, 0.5); border-radius: 10px">
+        <br>
+      <h5 class="{% if LANGUAGE_BIDI %}text-right{% else %}text-left{% endif %}" style="color: #0F6CA5">{% trans "Return Task" %}</h5>
+      <br>
+      <p style="direction: {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+        {% trans "Returns the currently assigned task so that it is no longer assigned to you." %}
+        {% trans "If you accept a task from the same batch, that returned task could be assigned to you again." %}
+        {% trans "If you do not want to work on that particular task, you should skip it." %}
+      </p>
+    </div>
+    <div class="col-sm m-2" style="border: 3px solid rgba(171, 170, 170, 0.5); border-radius: 10px">
+        <br>
+      <h5  style="color: #0F6CA5">{% trans "Skip Task" %}</h5>
+      <br>
+      <p style="direction: {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %};">
+        {% trans "Skip to the next available task in the Batch." %}
+        {% trans "The task is removed from your assignments." %}
+        {% trans "You may see it again if all other tasks have been completed and no one else completed it." %}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

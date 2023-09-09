@@ -1,0 +1,210 @@
+{% extends "turkle/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+
+<link href="{% static 'turkle/cal-heatmap.css' %}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/d3-3.5.17.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/cal-heatmap-3.6.2.min.js' %}"></script>
+<style>
+tbody.collapse.in {
+  display: table-row-group;
+}
+</style>
+<script>
+$(document).ready(function() {
+  // Set startDate to include previous 11 months plus all current month
+  var currentDate = new Date();
+  var year = currentDate.getFullYear();
+  var month = currentDate.getMonth(); // 0-indexed
+  month -= 11;
+  if (month < 0) {
+    month += 12;
+    year -= 1;
+  }
+  var startDate = new Date(year, month, 1);
+  // Use template variable for startDate if template variable defined
+  {% if start_date %}
+  startDate = new Date("{{ start_date }}");
+  {% endif %}
+
+var startDate2 = new Date(year, month+6, 1);
+  // Use template variable for startDate if template variable defined
+  {% if start_date %}
+  startDate2 = new Date("{{ start_date|add:"6.months"}}");
+  {% endif %}
+
+  var cal = new CalHeatMap();
+  cal.init({
+    itemSelector: "#activity-calendar",
+    data: "{% url 'user_activity_json' user_id %}",
+    domain: "month",
+    subDomain: "day",
+    start: startDate,
+    weekStartOnMonday: false,
+            range: 6,          // Number of ranges for color scale
+            cellSize: 10,      // Size of each cell
+            itemName: ['item', 'items'],
+            displayLegend: false,
+            legendCellSize: 10,
+      legendColors: ["#9dd0fa"],
+            {#legendVerticalPosition: 'center',#}
+            legendHorizontalPosition: 'right'
+  });
+  var cal2 = new CalHeatMap();
+  cal2.init({
+    itemSelector: "#activity-calendar2",
+    data: "{% url 'user_activity_json' user_id %}",
+    domain: "month",
+    subDomain: "day",
+    start: startDate2,
+    weekStartOnMonday: false,
+            range: 6,          // Number of ranges for color scale
+            cellSize: 10,      // Size of each cell
+            itemName: ['item', 'items'], // Color scale legend values#}
+            displayLegend: true,
+            legendCellSize: 10,
+      legendColors: ["#9dd0fa"],
+            legendHorizontalPosition: 'right'
+  });
+});
+ $(document).ready(function() {
+      $('.angle-icon').click(function() {
+        $(this).toggleClass('fa-angle-down fa-angle-up');
+      });
+    });
+ document.addEventListener('DOMContentLoaded', function() {
+    // Get all elements with 'data-toggle' attribute and loop through them
+               var tooltipElements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+               for (let i = 0; i < tooltipElements.length; i++) {
+      // Initialize Bootstrap tooltip for each element
+        var tooltipElement = tooltipElements[i];
+        var tooltipTitle = tooltipElement.getAttribute('data-original-title');
+        new bootstrap.Tooltip(tooltipElement, { title: tooltipTitle});
+    }
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid mt-5" align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+
+  <h2 align="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="mb-5" style="color: #15006C">{% blocktrans %}Statistics for ({{ full_name }}){% endblocktrans %}</h2>
+  <form>
+    <div class="row m-0"  dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+    <div class="col-md-3">
+        <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <label for="start_date">{% trans "Start Date" %}</label>
+        <br>
+        <input type="date" id="start_date" name="start_date" style="border-radius: 7px;border: 2px solid #15006C;height: 60%"
+               {% if start_date %}value="{% blocktrans %}{{ start_date }}{% endblocktrans %}"{% endif %}>
+        </div>
+        <div class="col-md-6 col-sm-12">
+             <label for="end_date">{% trans "End Date" %}</label>
+        <br>
+        <input type="date" id="end_date" name="end_date" style="border-radius: 7px;border: 2px solid #15006C;height: 60%"
+               {% if end_date %}value="{% blocktrans %}{{ end_date }}{% endblocktrans %}"{% endif %}>
+        </div>
+        <div class="col-md-5 {% if LANGUAGE_BIDI %}mr-auto{% else %}ml-auto{% endif %}">
+        <input type="submit" id="submitButton" class="btn btn-primary mt-3" style="border-radius: 10px"
+               value="Computing">
+      </div>
+         <div id="activity-calendar-container col-md-6" style="margin-top: 2em;">
+    <div id="activity-calendar" style="color: black" ></div>
+             <div id="activity-calendar-container col-md-6" style="margin-top: 2em;">
+    <div id="activity-calendar2" style="color: black" ></div>
+    </div>
+    </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+            <div>
+        <table class="table table-responsive-sm"  dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border:1px solid rgba(0, 0, 0, 0.25)">
+        <caption dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" style="border-bottom: 1px solid rgba(0, 0, 0, 0.25);border-right: 1px solid rgba(0, 0, 0, 0.25);border-left: 1px solid rgba(0, 0, 0, 0.25)">
+        <span class="pr-4" style="float: right">
+            {% blocktrans %}Total Task Assignments: {{ total_completed }}{% endblocktrans %}
+        {% if not start_date and not end_date %}
+        (All time)
+        {% else %}
+        ({% if start_date %}{% blocktrans %}{{ start_date }}{% endblocktrans %}{% endif %} - {% if end_date %}{% blocktrans %}{{ end_date }}{% endblocktrans %}{% endif %})
+        {% endif %}
+        </span>
+        <span id="tooltipSpan" class="pl-4" style="float: left;cursor: default" data-bs-placement="left" data-bs-toggle="tooltip" data-original-title="Elapsed Time is the time between when you Accept a Task Assignment and when you Submit that Task Assignment.  Elapsed Time is not the same thing as time worked.  If you Accept a Task Assignment, leave for lunch, and then Submit the task after lunch, the amount of Elapsed Time will be longer than the amount of time you spent working on the Task">
+         {% blocktrans %}Total Elapsed Time: {{ total_elapsed_time }}{% endblocktrans %}
+        </span>
+
+        </caption>
+        <thead>
+        <tr style="background-color: #517FB9;color:white">
+            <th></th>
+            <th scope="col" style="text-align: center;vertical-align: center">Project</th>
+            <th scope="col" style="text-align: center">{% trans "# Tasks" %}</th>
+            <th  scope="col" style="text-align: center">{% trans " Elapsed Time" %}</th>
+            <th  scope="col" style="text-align: center">{% trans "Blank Answer's Count" %}</th>
+          </tr>
+        </thead>
+        {% for project in project_stats %}
+        <tbody>
+        <tr>
+        <td><i class="fa fa-lg fa-angle-down angle-icon" data-bs-toggle="collapse"
+            data-bs-target="#group-of-rows-{{ forloop.counter }}" aria-expanded="false" aria-controls="group-of-rows-{{ forloop.counter }}" style="cursor: pointer"></i></td>
+            <td style="text-align: center">
+              {% blocktrans with project_name=project.project_name %}{{ project_name }}{% endblocktrans %}
+            </td>
+            <td style="text-align: center">
+              {% blocktrans with total_completed_project=project.total_completed_project %}{{ total_completed_project }}{% endblocktrans %}
+            </td>
+            <td style="text-align: center">
+              {% blocktrans with elapsed_tome_project=project.elapsed_time_project %}{{ elapsed_time_project }}{% endblocktrans %}
+            </td>
+            <td style="text-align: center">
+              {% blocktrans with blank_answers_project=project.blank_answers_project %}{{ blank_answers_project }}{% endblocktrans %}
+            </td>
+          </tr>
+        </tbody>
+        {% for batch in project.batch_stats %}
+            <tbody class="collapse" id="group-of-rows-{{ forloop.parentloop.counter }}">
+        {% if forloop.first %}
+            <tr class="table-info">
+                <th></th>
+                <th scope="col" style="text-align: center">Batch</th>
+                <th scope="col" style="text-align: center">{% trans "# Tasks" %}</th>
+                <th  scope="col" style="text-align: center">{% trans "Elapsed Time" %}</th>
+                <th scope="col" style="text-align: center">{% trans "Blank Answer's Count" %}</th>
+            </tr>
+        {% endif %}
+            <tr class="table-warning">
+            <td></td>
+                <td class="pl-4" style="text-align: center">
+                    {% blocktrans with batch_name=batch.batch_name %}{{ batch_name }}{% endblocktrans %}
+                </td>
+                <td style="text-align: center">
+                  {% blocktrans with total_completed_batch=batch.total_completed_batch %}{{ total_completed_batch }}{% endblocktrans %}
+                </td>
+                <td style="text-align: center">
+                  {% blocktrans with elapsed_time_batch=batch.elapsed_time_batch %}{{ elapsed_time_batch }}{% endblocktrans %}
+                </td>
+                <td style="text-align: center">
+                  {% blocktrans with blank_answers_batch=batch.blank_answers_batch %}{{ blank_answers_batch }}{% endblocktrans %}
+                </td>
+              </tr>
+            </tbody>
+
+              {% endfor %}
+              {% endfor %}
+            </table>
+          </div>
+
+    </div>
+
+   </div>
+  </form>
+
+</div>
+
+{% endblock %}

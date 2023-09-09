@@ -1,0 +1,15 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'turkle/jquery-3.3.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'turkle/parsley-2.9.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/turkle-file-upload.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/turkle-admin.js' %}"></script>
+<script>
+$(document).ready(function() {
+  $('#project_form').parsley();
+});
+</script>
+{% endblock %}

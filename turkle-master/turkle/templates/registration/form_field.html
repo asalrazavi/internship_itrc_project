@@ -1,0 +1,26 @@
+{% load turkle_tags %}
+<head>
+    <style>
+        .input-design:focus {
+            outline: none !important;
+            box-shadow: none;
+            background-color: white;
+        }
+
+        input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+    </style>
+</head>
+<div class="{% if field.errors %}has-error{% endif %}">
+  <div class="pr-3 pl-3">
+    <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="id_{{ field.name }}"  class="form-control mb-4 input-design " style="border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.78); border-radius: 0;" placeholder="{{ field.label }}">
+    {% if field.errors %}
+      <span class='text-danger'>{{ field.errors|join:'<br />' }}</span>
+    {% endif %}
+  </div>
+</div>

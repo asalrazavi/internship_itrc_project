@@ -1,0 +1,187 @@
+{% extends "turkle/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load jformat %}
+{% block body %}
+<style>
+@media (min-width: 768px) {
+    .triangle-up1 {
+            width: 0;
+            height: 0;
+            border-left: 40rem solid transparent; /* Adjust the size of the triangle */
+            border-right: 40rem solid transparent; /* Adjust the size of the triangle */
+            border-bottom: 60rem solid #FF8601; /* Adjust the color and size of the triangle */
+            position: absolute;
+            top: 75%; /* Align the top of the triangle to the middle of the page */
+            left: -40rem; /* Adjust the distance from the left side of the page */
+            transform: translateY(-50%); /* Center the triangle vertically */
+            z-index: -2;
+        }
+
+        .triangle-up2 {
+            width: 0;
+            height: 0;
+            border-left: 20rem solid transparent; /* Adjust the size of the triangle */
+            border-right: 20rem solid transparent; /* Adjust the size of the triangle */
+            border-bottom: 20rem solid #0F6CA5; /* Adjust the color and size of the triangle */
+            position: absolute;
+            top: 95%; /* Align the top of the triangle to the middle of the page */
+            left: 8rem; /* Adjust the distance from the left side of the page */
+            transform: translateY(-50%); /* Center the triangle vertically */
+            z-index: 2;
+        }
+
+        a{
+            color: #FF8601;
+        }
+
+        a:hover{
+            color: #FF8601;
+        }
+
+        .card{
+            border: 1px #FFFFFF solid;
+            box-shadow: 4px 4px 10px 2px rgba(15, 108, 165, 0.56);
+            border-radius: 10px;
+        }
+
+        .rtl {
+          direction: rtl;
+          text-align: right;
+        }
+
+        {% if not batch_rows %}
+        body {
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .container-fluid.content {
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        {% endif %}
+@media (min-width: 992px) {
+    .margin-l {
+        margin-left: 10%;
+    }
+    .margin-r {
+        margin-right: 10%;
+    }
+}
+@media (max-width: 768px) {
+    .width-75 {
+        width: 75%;
+    }
+}
+
+</style>
+
+{% if abandoned_assignments %}
+<div class="d-flex justify-content-center container-fluid pt-4" style="padding: 0 2rem 0 2rem" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+  <div class="row w-100" style="{% if LANGUAGE_BIDI %}margin: 0 6rem 0 5rem;{% else %}margin: 0 5rem 0 6rem;{% endif %}">
+    {% for aa in abandoned_assignments %}
+    <div class="justify-content-center mb-4" style="flex: 0 0 20%;">
+      <div class="card d-flex justify-content-center align-items-center" style="max-width: 14rem; background-color: rgba(255,134,2,20%); border: rgba(255,134,2,20%); box-shadow: 4px 4px 10px 2px rgba(15, 108, 165, 56%)" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+        <div class="card-body d-flex flex-column {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+          <div class="d-flex align-items-center mb-1">
+            <p class="mb-0" style="color: #683701"><b style="color: #B55F00">{% trans "Task" %}</b>      {{ aa.task.id }}</p>
+          </div>
+          <p class="mb-1"><b style="color: #B55F00">{% trans "Project" %}</b></p>
+          <p class="mb-1" style="color: #683701">{{ aa.task.batch.project.name }}</p>
+          <p class="mb-1"><b style="color: #B55F00">{% trans "Batch" %}</b></p>
+          <p style="color: #683701">{{ aa.task.batch.name }}</p>
+
+          <div class="{% if LANGUAGE_BIDI %}float-left{% else %}float-right{% endif %}">
+            <div class="d-flex align-items-center">
+              <a href="{% url 'task_assignment' aa.task.id aa.task_assignment_id %}" class="btn btn-sm btn-primary ml-1" style="background-color: #FF8601; border: #FF8601; width: 5.5rem">
+                {% trans "Continue" %}
+              </a>
+              <form method="post" action="{% url 'return_task_assignment' aa.task.id aa.task_assignment_id %}">
+                {% csrf_token %}
+                <input type="Submit" class="btn btn-sm btn-primary ml-1" value="{% trans "Return" %}" style="background-color: rgba(225,118,0,49%); border: rgba(225,118,0,49%); width: 5.5rem" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<hr style="border-top: 0.2rem solid rgba(0,0,0,15%); margin: 30px auto; width: 70%;">
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+
+
+<div class="d-flex justify-content-center align-items-center container-fluid content mt-2" style="padding: 0 2rem 0 2rem"  dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+  {% if not batch_rows %}
+    {% if not abandoned_assignments %}
+        <div class="triangle-up1"></div>
+        <div class="triangle-up2"></div>
+    {% endif %}
+  {% endif %}
+  {% if batch_rows %}
+    <div class="row w-100" style="margin: 0 7rem 0 7rem">
+        {% regroup batch_rows by project_name as project_group %}
+
+        {% for group in project_group %}
+            <div class="col-md-12 mt-4 p-0 {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                <h4 class="pb-3" style="color: #0F6CA5; {% if LANGUAGE_BIDI %}margin: 0 -0.7rem 0 0;{% else %}margin: 0 0 0 -0.7rem;{% endif %}">{% trans "Project" %}: {{ group.grouper }}</h4>
+                <div class="row card-container">
+                    {% for batch_row in group.list %}
+                        <div class="mb-1 p-0 col-md-3 mb-3">
+                            <div class="card mb-2" style="max-width: 18rem">
+                                <div class="card-body {% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+                                    <h6 style="color: #15006C; margin-bottom: 0.2rem">{% trans "Batch" %}</h6>
+                                  <p style="color: #0F6CA5; font-size: 1rem; margin-bottom: 0.7rem">{% blocktrans with batch_name=batch_row.batch_name %}{{ batch_name }}{% endblocktrans %}</p>
+                                  <h6 style="color: #15006C; margin-bottom: 0.2rem">{% trans "Batch Published" %}</h6>
+                                  <p style="color: #0F6CA5; font-size: 1rem; margin-bottom: 0.7rem">{% blocktrans with batch_published=batch_row.batch_published assignments_available=batch_row.assignments_available %}{{ batch_published }}{% endblocktrans %}</p>
+                                  <h6 style="color: #15006C; margin-bottom: 0.2rem">{% trans "Tasks Available" %}</h6>
+                                  <p style="color: #0F6CA5; font-size: 1rem; margin-bottom: 0.7rem">{% blocktrans with assignments_available=batch_row.assignments_available %}{{ assignments_available }}{% endblocktrans %}</p>
+                                  <a href="{{ batch_row.preview_next_task_url }}" class="btn btn-block" style="background-color: #0F6CA5; color: #ffffff">{% trans "Preview next Task" %}</a>
+                                  <form method="post" action="{{ batch_row.accept_next_task_url }}">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn mt-2 btn-block" style="background-color: #0F6CA5; color: #ffffff" value="{% trans "Accept next Task" %}" />
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if not forloop.last %}
+                <hr style="border-top: 0.2rem solid rgba(0,0,0,15%); margin: 30px auto; width: 86%;">
+            {% endif %}
+        {% endfor %}
+    </div>
+  {% else %}
+  {% if not  abandoned_assignments%}
+  <div  class="d-flex flex-column justify-content-center align-items-center">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt" viewBox="0 0 225.000000 225.000000" preserveAspectRatio="xMidYMid meet">
+          <metadata>
+              Created by potrace 1.16, written by Peter Selinger 2001-2019
+          </metadata>
+          <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)"
+          fill="#000000" stroke="none">
+          <path d="M811 2220 c-76 -18 -131 -95 -131 -182 l0 -48 -85 0 -85 0 -2 -442 -3 -441 -53 -12 c-362 -82 -537 -489 -347 -810 65 -110 183 -200 320 -242 56 -17 114 -18 930 -18 l870 0 3 982 2 982 -87 3 -88 3 -3 45 c-4 67 -9 85 -38 120 -36 43 -78 62 -134 62 -93 -1 -151 -62 -160 -167 l-5 -60 -87 -3 -88 -3 0 48 c0 57 -32 128 -71 156 -80 58 -200 31 -244 -54 -9 -16 -17 -55 -19 -86 l-4 -58 -91 -3 -91 -3 0 38 c0 99 -43 164 -123 188 -28 8 -51 15 -51 14 -1 -1 -16 -5 -35 -9z m89 -110 c18 -18 20 -33 20 -165 0 -132 -2 -147 -20 -165 -27 -27 -71 -26 -99 4 -24 25 -24 22 -22 229 1 88 18 117 71 117 17 0 39 -9 50 -20z m520 0 c18 -18 20 -33 20 -163 0 -160 -5 -174 -61 -183 -29 -5 -41 -2 -58 15 -19 19 -21 32 -21 166 0 132 2 147 20 165 11 11 33 20 50 20 17 0 39 -9 50 -20z m519 -6 c19 -24 21 -40 21 -151 0 -89 -4 -132 -15 -152 -24 -48 -72 -55 -110 -16 -24 23 -25 29 -25 158 0 121 2 137 21 161 15 19 30 26 54 26 24 0 39 -7 54 -26z m-1256 -258 c8 -77 32 -122 82 -151 121 -72 255 16 255 168 l0 38 93 -3 c73 -2 92 -6 93 -18 1 -8 2 -36 2 -62 3 -80 78 -148 164 -148 94 1 168 81 168 182 l0 48 90 0 90 0 0 -59 c0 -101 68 -171 165 -171 96 0 165 75 165 179 l0 51 40 0 40 0 0 -890 0 -890 -587 -1 c-324 0 -605 -1 -626 -2 -20 -1 -37 -1 -37 -1 0 1 31 33 69 71 109 111 155 225 154 383 0 151 -48 264 -159 377 -71 73 -194 137 -285 151 l-54 7 -3 398 -2 397 38 0 39 0 6 -54z m57 -868 c182 -82 279 -246 268 -448 -6 -105 -39 -184 -108 -262 -149 -169 -416 -198 -599 -64 -64 47 -103 97 -143 182 -55 117 -50 272 12 394 46 90 165 186 267 216 78 22 235 13 303 -18z"/><path d="M760 1395 l0 -45 605 0 605 0 0 45 0 45 -605 0 -605 0 0 -45z"/><path d="M920 1055 l0 -45 525 0 525 0 0 45 0 45 -525 0 -525 0 0 -45z"/><path d="M1160 715 l0 -45 405 0 405 0 0 45 0 45 -405 0 -405 0 0 -45z"/><path d="M1160 383 l0 -48 405 0 405 0 0 48 0 47 -405 0 -405 0 0 -47z"/><path d="M649 714 l-84 -84 -82 82 -83 83 -32 -33 -33 -32 83 -82 82 -83 -81-81 c-73 -73 -80 -83 -68 -101 6 -11 21 -26 32 -32 18 -12 28 -5 101 68 l81 81 83 -82 82 -83 32 33 33 32 -83 82 -82 83 84 85 85 85 -33 32 -33 32 -84 -85z"/>
+          </g>
+        </svg>
+        <h1 align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">{% trans "No Tasks available at this time" %}</h1>
+        {% if not user.is_authenticated  %}
+        {% url 'login' as the_url %}
+        <h4 align="{% if LANGUAGE_BIDI %}right{% else %}left{% endif %}">
+            {% blocktrans %}You may need to <a href="{{ the_url }}">Login</a> to see available Tasks{% endblocktrans %}
+        </h4>
+  </div>
+  {% endif %}
+  {% endif %}
+  {% endif %}
+</div>
+
+{% endblock %}
